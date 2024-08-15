@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../public/css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ionicon -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- local module -->
+    <script type="module" src="../../public/js/home.js"></script>
+
+    <!-- toastr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+        body {
+            font-family: "Montserrat", sans-serif;
+            background: #ddf5ff;
+        }
+    </style>
+
+    <title>Dashboard | Expense Tracker</title>
+</head>
+
+<body class="h-screen overflow-hidden">
+
+    <div class="flex flex-col h-screen">
+
+        <!-- Header -->
+        <section>
+        <div class="flex justify-between mt-3">
+            <a class="" href="../index.html"
+                class="pl-2 self-center cursor-pointer duration-200 hover:scale-125 active:scale-100"
+                title="Go Back">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 24 24"
+                    class="stroke-blue-300">
+                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5"
+                    d="M11 6L5 12M5 12L11 18M5 12H19"></path>
+                </svg>
+            </a>
+            <div class="text-center mt-2 flex-1 mr-5">
+                <h1 class="font-bold text-2xl">Profile</h1>
+            </div>
+        </div>
+    </section>
+
+    <!-- Avatar -->
+    <section class="flex flex-col items-center justify-center p-4">
+        <div class="flex items-start space-x-4">
+            <!-- Profile Photo -->
+            <div class="w-24 h-24 rounded-full overflow-hidden border-2 border-gray-300">
+                <img src="path/to/profile-photo.jpg" alt="" class="w-full h-full object-cover">
+            </div>
+            
+            <!-- Profile Details -->
+            <div>
+                <h1 class="text-2xl font-bold">User</h1>
+                <p class="">Target Expense: 500.000</p>
+            </div>
+
+        </div>
+    </section>
+    
+    <div class="flex flex-col items-center align-bottom space-y-2">
+        <a href="./targetExpense.html">
+            <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none">
+                Set Target Expense
+            </button>
+        </a>
+        
+        <button class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none">
+            Log Out
+        </button>
+    </div>
+    
+    
+
+    <footer id="footer" style="
+        max-width: 480px !important;
+        height: 15vh !important;
+        margin-inline: auto;
+      " class="is-flex is-flex-direction-column">
+        <div
+            class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600">
+            <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
+                <a href="../index.html" data-tooltip-target="tooltip-home" type="button"
+                    class="inline-flex flex-col items-center justify-center px-5 rounded-s-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
+                    <ion-icon class="w-7 h-7 mb-1 text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true"
+                        name="home-outline"></ion-icon>
+                        
+                        <span class="sr-only">Home</span>
+                    </a>
+                    <div id="tooltip-home" role="tooltip"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    Home
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+                <button data-tooltip-target="tooltip-wallet" type="button"
+                    class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+                    <ion-icon
+                    class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+                        aria-hidden="true" name="apps-outline"></ion-icon>
+                    <span class="sr-only">Menu</span>
+                </button>
+                <div id="tooltip-wallet" role="tooltip"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    Wallet
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+                <div class="flex items-center justify-center">
+                    <button data-tooltip-target="tooltip-new" type="button"
+                        class="inline-flex items-center justify-center w-10 h-10 font-medium bg-blue-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800">
+                        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 18 18">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 1v16M1 9h16" />
+                        </svg>
+                        <span class="sr-only">New item</span>
+                    </button>
+                </div>
+                <div id="tooltip-new" role="tooltip"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    Create new item
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+                <button data-tooltip-target="tooltip-settings" type="button"
+                    class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+                    <ion-icon
+                        class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+                        aria-hidden="true" name="clipboard-outline"></ion-icon>
+                    <span class="sr-only">Settings</span>
+                </button>
+                <div id="tooltip-settings" role="tooltip"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    Settings
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+                <a href="profile.html" data-tooltip-target="tooltip-profile" type="button"
+                    class="inline-flex flex-col items-center justify-center px-5 rounded-e-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
+                    <ion-icon
+                        class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+                        aria-hidden="true" name="person-outline"></ion-icon>
+                    <span class="sr-only">Profile</span>
+                </a>
+                <div id="tooltip-profile" role="tooltip"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    Profile
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+
+</html>
