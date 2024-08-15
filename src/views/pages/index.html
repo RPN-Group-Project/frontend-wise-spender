@@ -1,88 +1,437 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wise Spender</title>
+    <link rel="stylesheet" href="../../public/css/style.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- ionicon -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+    <!-- local module -->
+    <script type="module" src="../../public/js/home.js"></script>
+
+    <!-- toastr -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        background: #ddf5ff;
+      }
+    </style>
+
+    <title>Dashboard | Expense Tracker</title>
   </head>
-
-  <body
-    style="max-width: 480px !important; min-height: 100vh; height: auto; margin-inline: auto"
-    class="is-flex is-flex-direction-column">
-    <main style="background-color: aqua;">
-        
-    </main>
-    <!-- Nav -->
-    <footer id="footer">
-        <div class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600">
-    <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
-        <button data-tooltip-target="tooltip-home" type="button" class="inline-flex flex-col items-center justify-center px-5 rounded-s-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg class="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
+  <body>
+    <section
+      style="
+        background-image: url('../../public/assets/cool-backgroung.png');
+        background-repeat: no-repeat;
+        background-size: 100% 75%;
+      "
+      class="px-4 pt-4"
+    >
+      <header class="flex justify-between align-center">
+        <h2 class="text-[1rem] font-bold">
+          Hello, <span id="username">Name</span>
+        </h2>
+        <nav>
+          <a class="inline-block" href="#">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="ionicon"
+              viewBox="0 0 512 512"
+              width="25"
+              height="25"
+            >
+              <path
+                d="M427.68 351.43C402 320 383.87 304 383.87 217.35 383.87 138 343.35 109.73 310 96c-4.43-1.82-8.6-6-9.95-10.55C294.2 65.54 277.8 48 256 48s-38.21 17.55-44 37.47c-1.35 4.6-5.52 8.71-9.95 10.53-33.39 13.75-73.87 41.92-73.87 121.35C128.13 304 110 320 84.32 351.43 73.68 364.45 83 384 101.61 384h308.88c18.51 0 27.77-19.61 17.19-32.57zM320 384v16a64 64 0 01-128 0v-16"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
+              />
             </svg>
+          </a>
+          <a href="#" class="text-dark inline-block">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="ionicon"
+              viewBox="0 0 512 512"
+              width="25"
+              height="25"
+            >
+              <path
+                d="M258.9 48C141.92 46.42 46.42 141.92 48 258.9c1.56 112.19 92.91 203.54 205.1 205.1 117 1.6 212.48-93.9 210.88-210.88C462.44 140.91 371.09 49.56 258.9 48zm126.42 327.25a4 4 0 01-6.14-.32 124.27 124.27 0 00-32.35-29.59C321.37 329 289.11 320 256 320s-65.37 9-90.83 25.34a124.24 124.24 0 00-32.35 29.58 4 4 0 01-6.14.32A175.32 175.32 0 0180 259c-1.63-97.31 78.22-178.76 175.57-179S432 158.81 432 256a175.32 175.32 0 01-46.68 119.25z"
+              />
+              <path
+                d="M256 144c-19.72 0-37.55 7.39-50.22 20.82s-19 32-17.57 51.93C191.11 256 221.52 288 256 288s64.83-32 67.79-71.24c1.48-19.74-4.8-38.14-17.68-51.82C293.39 151.44 275.59 144 256 144z"
+              />
+            </svg>
+          </a>
+        </nav>
+      </header>
+
+      <div
+        class="custom-gradient mt-3 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-[10px] text-white p-3 flex justify-between align-center"
+      >
+        <div>
+          <div class="money-spent">
+            <h2 class="text-[0.875rem]">Money Spent:</h2>
+            <p id="money-spent" class="text-[2rem]">1.000.000</p>
+          </div>
+          <div class="mt-2">
+            <h2 class="text-[0.875rem]">Limit Expense:</h2>
+            <p id="limit-expense" class="mt-1 fw-bold text-[1.25rem]">
+              2.000.000
+            </p>
+          </div>
+        </div>
+        <div class="self-center relative w-32 h-32">
+          <canvas class="z-40" id="chartDoughnut"></canvas>
+          <div
+            class="w-28 h-28 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600 text-center flex align-center justify-center text-white font-bold"
+          >
+            <span id="chartDoughnut-text" class="m-auto">0%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="alert" class="alert hidden px-4">
+      <div
+        class="bg-red-100 mt-3 border border-red-400 text-red-700 px-4 py-3 rounded relative max-[375px]:text-[0.875rem]"
+        role="alert"
+      >
+        <span id="alert-text" class="block sm:inline"
+          >Looks like you boros enough.</span
+        >
+        <span
+          id="alert-close-button"
+          class="absolute top-0 bottom-0 right-0 px-4 py-3"
+        >
+          <svg
+            class="fill-current h-6 w-6 text-red-500"
+            role="button"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <title>Close</title>
+            <path
+              d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"
+            />
+          </svg>
+        </span>
+      </div>
+    </section>
+
+    <section class="shortcut px-4 mt-3">
+      <h1 class="text-[1rem] font-[500]">Shortcut</h1>
+      <nav class="flex justify-between mt-[1.125rem]">
+        <a
+          class="text-dark shortcut-link flex flex-col align-center px-2"
+          href="../components/add-expense-modal.html"
+        >
+          <ion-icon
+            class="w-[30px] h-[30px] self-center transform transition-transform duration-300 hover:scale-110"
+            name="wallet-outline"
+          ></ion-icon>
+          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-600">
+            Add Expense
+          </p>
+        </a>
+        <a
+          class="text-dark shortcut-link flex flex-col align-center px-2"
+          href="../components/add-category-modal.html"
+        >
+          <ion-icon
+            name="folder-outline"
+            class="w-[30px] h-[30px] self-center transform transition-transform duration-300 hover:scale-110"
+          ></ion-icon>
+          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-600">
+            Add Category
+          </p>
+        </a>
+        <a
+          href="../history.html"
+          class="text-dark shortcut-link flex flex-col align-center px-2"
+        >
+          <ion-icon
+            name="clipboard-outline"
+            class="w-[30px] h-[30px] self-center transform transition-transform duration-300 hover:scale-110"
+          ></ion-icon>
+          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-600">
+            History
+          </p>
+        </a>
+        <a
+          href="../limit-expense.html"
+          class="text-dark shortcut-link flex flex-col align-center px-2"
+        >
+          <ion-icon
+            name="settings-outline"
+            class="w-[30px] h-[30px] self-center transform transition-transform duration-300 hover:scale-110"
+          ></ion-icon>
+          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-600">
+            Limit Expense
+          </p>
+        </a>
+      </nav>
+    </section>
+
+    <section class="history px-4 mt-4">
+      <div class="flex justify-between">
+        <h1 class="text-[1rem] font-[500]">History</h1>
+        <a href="./history.html" class="text-[0.875rem] text-blue-600"
+          ><div
+            class="group hover:text-sky-600 transition ease-in-out duration-200"
+          >
+            See All
+            <span
+              aria-hidden="true"
+              class="inline-block translate-x-0 group-hover:translate-x-1 transition-transform ease-in-out duration-200"
+              >→</span
+            >
+          </div></a
+        >
+      </div>
+
+      <div class="flex flex-col mt-2">
+        <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+          <div class="py-2 inline-block min-w-full sm:px-4 lg:px-8">
+            <div class="overflow-hidden">
+              <table class="min-w-full">
+                <thead class="bg-white border-b">
+                  <tr>
+                    <th
+                      scope="col"
+                      class="text-sm font-medium text-gray-900 px-4 py-4 text-left"
+                    >
+                      Date
+                    </th>
+                    <th
+                      scope="col"
+                      class="text-sm font-medium text-gray-900 px-4 py-4 text-left"
+                    >
+                      Category
+                    </th>
+                    <th
+                      scope="col"
+                      class="text-sm font-medium text-gray-900 px-4 py-4 text-left"
+                    >
+                      Price
+                    </th>
+                    <th
+                      scope="col"
+                      class="text-sm font-medium text-gray-900 px-4 py-4 text-left"
+                    >
+                      Action
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="history-table-body">
+                  <tr class="bg-white border-b">
+                    <td
+                      class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                    >
+                      1 Aug
+                    </td>
+                    <td
+                      class="text-sm text-gray-900 font-light px-4 py-4 whitespace-nowrap"
+                    >
+                      <a
+                        href="#"
+                        class="underline underline-offset-[3px] text-blue-600 hover:no-underline hover:bg-[url(&#x27;https://snippets.alexandru.so/squiggle.svg&#x27;)]"
+                      >
+                        Entertainment
+                      </a>
+                    </td>
+                    <td
+                      class="text-sm text-gray-900 font-light px-4 py-4 whitespace-nowrap"
+                    >
+                      500.000
+                    </td>
+                    <td
+                      class="text-[0.75rem] text-blue-600 font-light px-4 py-4 whitespace-nowrap"
+                    >
+                      <div
+                        class="group hover:text-sky-600 transition ease-in-out duration-200"
+                      >
+                        Details
+                        <span
+                          aria-hidden="true"
+                          class="inline-block translate-x-0 group-hover:translate-x-1 transition-transform ease-in-out duration-200"
+                          >→</span
+                        >
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-4 py-2 mt-2">
+      <h1 class="text-[1rem] font-[500]">Expense Chart Week</h1>
+      <div
+        class="shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-[10px] bg-white mt-3 p-2"
+      >
+        <canvas id="myChart" class="mt-3"></canvas>
+      </div>
+    </section>
+    <footer
+      id="footer"
+      style="
+        max-width: 480px !important;
+        height: 15vh !important;
+        margin-inline: auto;
+      "
+      class="is-flex is-flex-direction-column"
+    >
+      <div
+        class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600"
+      >
+        <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
+          <button
+            data-tooltip-target="tooltip-home"
+            type="button"
+            class="inline-flex flex-col items-center justify-center px-5 rounded-s-full hover:bg-gray-50 dark:hover:bg-gray-800 group"
+          >
+            <ion-icon
+              class="w-7 h-7 mb-1 text-blue-600 dark:group-hover:text-blue-500"
+              aria-hidden="true"
+              name="home-outline"
+            ></ion-icon>
+
             <span class="sr-only">Home</span>
-        </button>
-        <div id="tooltip-home" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+          </button>
+          <div
+            id="tooltip-home"
+            role="tooltip"
+            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+          >
             Home
             <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
-        <button data-tooltip-target="tooltip-wallet" type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg class="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M11.074 4 8.442.408A.95.95 0 0 0 7.014.254L2.926 4h8.148ZM9 13v-1a4 4 0 0 1 4-4h6V6a1 1 0 0 0-1-1H1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1v-2h-6a4 4 0 0 1-4-4Z"/>
-                <path d="M19 10h-6a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1Zm-4.5 3.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM12.62 4h2.78L12.539.41a1.086 1.086 0 1 0-1.7 1.352L12.62 4Z"/>
-            </svg>
-            <span class="sr-only">Wallet</span>
-        </button>
-        <div id="tooltip-wallet" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+          </div>
+          <button
+            data-tooltip-target="tooltip-wallet"
+            type="button"
+            class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
+          >
+            <ion-icon
+              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+              aria-hidden="true"
+              name="apps-outline"
+            ></ion-icon>
+            <span class="sr-only">Menu</span>
+          </button>
+          <div
+            id="tooltip-wallet"
+            role="tooltip"
+            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+          >
             Wallet
             <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
-        <div class="flex items-center justify-center">
-            <button data-tooltip-target="tooltip-new" type="button" class="inline-flex items-center justify-center w-10 h-10 font-medium bg-blue-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800">
-                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                </svg>
-                <span class="sr-only">New item</span>
+          </div>
+          <div class="flex items-center justify-center">
+            <button
+              data-tooltip-target="tooltip-new"
+              type="button"
+              class="inline-flex items-center justify-center w-10 h-10 font-medium bg-blue-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800"
+            >
+              <svg
+                class="w-4 h-4 text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 18 18"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 1v16M1 9h16"
+                />
+              </svg>
+              <span class="sr-only">New item</span>
             </button>
-        </div>
-        <div id="tooltip-new" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+          </div>
+          <div
+            id="tooltip-new"
+            role="tooltip"
+            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+          >
             Create new item
             <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
-        <button data-tooltip-target="tooltip-settings" type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg class="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12.25V1m0 11.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M4 19v-2.25m6-13.5V1m0 2.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M10 19V7.75m6 4.5V1m0 11.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM16 19v-2"/>
-            </svg>
+          </div>
+          <button
+            data-tooltip-target="tooltip-settings"
+            type="button"
+            class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
+          >
+            <ion-icon
+              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+              aria-hidden="true"
+              name="clipboard-outline"
+            ></ion-icon>
             <span class="sr-only">Settings</span>
-        </button>
-        <div id="tooltip-settings" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+          </button>
+          <div
+            id="tooltip-settings"
+            role="tooltip"
+            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+          >
             Settings
             <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
-        <button data-tooltip-target="tooltip-profile" type="button" class="inline-flex flex-col items-center justify-center px-5 rounded-e-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg class="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
-            </svg>
+          </div>
+          <button
+            data-tooltip-target="tooltip-profile"
+            type="button"
+            class="inline-flex flex-col items-center justify-center px-5 rounded-e-full hover:bg-gray-50 dark:hover:bg-gray-800 group"
+          >
+            <ion-icon
+              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+              aria-hidden="true"
+              name="person-outline"
+            ></ion-icon>
             <span class="sr-only">Profile</span>
-        </button>
-        <div id="tooltip-profile" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+          </button>
+          <div
+            id="tooltip-profile"
+            role="tooltip"
+            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+          >
             Profile
             <div class="tooltip-arrow" data-popper-arrow></div>
+          </div>
         </div>
-    </div>
-</div>
-
+      </div>
     </footer>
-   
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
-</body>
-  <script>
-
-        
-  </script>
+  </body>
 </html>
