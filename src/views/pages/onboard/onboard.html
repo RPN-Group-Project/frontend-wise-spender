@@ -14,22 +14,49 @@
         .font-montserrat {
             font-family: 'Montserrat', sans-serif;
         }
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+<div class="loading-overlay" style="display: none;">
+    <div role="status">
+        <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08167 50.5908C9.08167 74.383 26.2078 91.5091 50 91.5091C73.7922 91.5091 90.9183 74.383 90.9183 50.5908C90.9183 26.7986 73.7922 9.67244 50 9.67244C26.2078 9.67244 9.08167 26.7986 9.08167 50.5908Z" fill="currentColor"/>
+            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5533C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8442 15.1192 80.6513 10.7232 74.6635 7.52883C68.6757 4.33443 61.1778 2.45942 53.4542 2.0508C48.7351 1.80399 44.0255 2.24223 39.4568 3.34399C37.0079 3.93417 35.5432 6.42986 36.1803 8.8555C36.8174 11.2811 39.3072 12.7424 41.7529 12.1667C45.7192 11.1717 49.7895 10.9051 53.7935 11.3858C59.8357 12.0482 65.6275 13.913 70.6598 16.8756C75.6921 19.8382 79.8419 23.8184 82.8606 28.5574C85.1917 32.2142 86.8525 36.2565 87.7738 40.4695C88.3463 42.8312 90.5423 44.2764 93.9676 43.7087Z" fill="currentFill"/>
+        </svg>
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
 <body class="bg-gray-100 h-screen flex items-center justify-center">
     <div class="w-full max-w-md p-6 flex flex-col items-center space-y-6">
         <div class="text-center">
             <h1 class="text-2xl font-roboto font-bold mb-2">Hello, [Name]</h1>
             <p class="text-lg font-montserrat">What is your target expense this month?</p>
         </div>
-        <form class="w-full">
+        <form id="expense-form" class="w-full">
             <div class="mb-4">
                 <input type="number" id="expense" name="expense" placeholder="Enter amount of target expense" class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 mt-1" required>
+            </div>
+            <div id="error-message" class="hidden p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
+                <span class="font-medium">Error!</span> <span id="error-text"></span>
             </div>
             <div class="text-center">
                 <button type="submit" class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm w-full px-5 py-2.5">Continue</button>
             </div>
         </form>
     </div>
+    <script src="../../../public/js/onboard.js"></script>
 </body>
 </html>

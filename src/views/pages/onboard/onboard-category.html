@@ -15,6 +15,8 @@
             font-family: 'Montserrat', sans-serif;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body class="bg-gray-100 h-screen flex flex-col">
     <!-- Header -->
@@ -26,10 +28,13 @@
     <main class="flex-grow flex items-center justify-center p-4">
         <div class="w-full max-w-md p-6 flex flex-col items-center space-y-6">
             <div class="text-center">
-                <h1 class="text-2xl font-roboto font-bold mb-2">Target Expense: $<span id="target-expense"></span></h1>
+                <div id="error-message" class="hidden p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
+                    <span class="font-medium">Error!</span> <span id="error-text"></span>
+                </div>
+                <h1 class="text-2xl font-roboto font-bold mb-2">Target Expense: Rp. <span id="target-expense"></span></h1>
                 <p class="text-lg font-montserrat">Allocate your budget to every category you made</p>
             </div>
-            <form class="w-full flex flex-col space-y-4">
+            <form id="categoryForm" class="w-full flex flex-col space-y-4">
                 <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
                     <!-- Expense Category Input -->
                     <div class="flex-1">
@@ -37,7 +42,7 @@
                     </div>
                     <!-- Amount Input -->
                     <div class="flex-1">
-                        <input type="number" id="amount" name="amount" placeholder="Amount" class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" required>
+                        <input type="number" id="monthlyBudget" name="monthlyBudget" placeholder="Monthly Budget" class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" required>
                     </div>
                     <!-- Add Button -->
                     <button type="submit" class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2.5">Add</button>
@@ -45,39 +50,14 @@
             </form>
 
             <!-- Table -->
-            <div class="relative overflow-x-auto w-full">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                Name
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Allocation
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Entertainment
-                            </th>
-                            <td class="px-6 py-4">
-                                100000
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <a href="#" style="color: #ffcc00;" class="mr-2 font-medium hover:underline">Edit</a> 
-                                <a href="#" style="color: #f87171;" class="font-medium hover:underline"> Delete</a>
-                                
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div id="table-category" class="relative overflow-x-auto w-full">
+              
+            </div>
+            <div class="text-center">
+                <button id="continueButton"  type="submit" class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm w-full px-5 py-2.5">Continue</button>
             </div>
         </div>
     </main>
+    <script src="../../../public/js/onboard-category.js"></script>
 </body>
 </html>
