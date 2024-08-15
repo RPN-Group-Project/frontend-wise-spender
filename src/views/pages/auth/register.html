@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.10/base.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
+
+    <style>
+        .font-roboto {
+            font-family: 'Roboto', sans-serif;
+        }
+        .font-montserrat {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+
+</head>
+<body class="bg-gray-100 m-0 p-0 h-screen flex items-center justify-center">
+    <div class="w-full max-w-md bg-white rounded-lg shadow-md min-h-screen flex flex-col">
+        <!-- Section 1: Logo and Text -->
+        <div class="bg-purple-500 text-white text-center py-8 rounded-t-lg flex-shrink-0 flex flex-col items-center justify-center">
+            <!-- Logo Image -->
+            <img src="../../../public/assets/logo.png" alt="Logo" class="w-24 h-24" >
+            <!-- App Title -->
+            <h1 class="text-3xl font-bold mb-2 font-roboto">Wise Spender</h1>
+            <!-- Tagline -->
+            <p class="text-2xl font-montserrat">Spend Your Money Wise</p>
+        </div>
+
+        <!-- Section 2: Form -->
+        <div class="p-6 flex-1 flex flex-col justify-center">
+            <label for="login"  class="text-xl font-semibold text-center mb-4 block">Register</label>
+            <form>
+                <div class="mb-5">
+                    <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" placeholder="Name" required />
+                </div>
+                <div class="mb-5">
+                    <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" placeholder="Email" required />
+                </div>
+                <div class="mb-5">
+                    <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" placeholder="Password" required />
+                </div>
+                <div class="mt-4 text-center mb-4">
+                    <p class="text-sm text-gray-600">Already have an account? <a href="./login.html" class="text-purple-700 hover:underline">Login</a></p>
+                </div>
+                <button type="submit" class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center">Submit</button>
+            </form>
+        </div>
+    </div>    
+    <!-- Flowbite JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+</body>
+</html>
