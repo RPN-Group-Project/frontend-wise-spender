@@ -50,6 +50,16 @@ $(document).ready(function () {
     $("#alert").addClass("hidden");
   });
 
+  // Modal
+  // $("#edit-profile").on("click", () => {
+  //   $("#modal-update-profile").addClass("is-active");
+  //   $("#modal-update-profile")
+  //     .find(
+  //       ".modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button"
+  //     )
+  //     .on("click", () => $("#modal-update-profile").removeClass("is-active"));
+  // });
+
   const fetchDashboard = () => {
     showLoader();
 
