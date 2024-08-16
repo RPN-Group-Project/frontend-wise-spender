@@ -22,19 +22,37 @@
     <!-- local module -->
     <script type="module" src="../../../public/js/today-expense.js"></script>
 
-    <!-- toastr -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                black: "#000000",
+                neutral: "#404040",
+                white: "#FFFFFF",
+              },
+              zinc: {
+                100: "#f4f4f5",
+                200: "#e4e4e7",
+                300: "#d4d4d8",
+                500: "#71717a",
+                800: "#27272a",
+              },
+              error: {
+                500: "#ef4444",
+              },
+            },
+          },
+        },
+      };
+    </script>
 
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
       body {
         font-family: "Montserrat", sans-serif;
-        background: #ddf5ff;
       }
 
       .custom-gradient {
@@ -44,7 +62,7 @@
 
     <title>Today Expense</title>
   </head>
-  <body>
+  <body class="bg-zinc-100">
     <div
       id="loader-wrapper"
       class="fixed hidden z-50 h-full w-full flex items-center justify-center h-screen z-50 bg-white opacity-90 transition-opacity duration-300 ease-in-out"
@@ -69,7 +87,7 @@
           width="50px"
           height="50px"
           viewBox="0 0 24 24"
-          class="stroke-blue-300"
+          class="stroke-zinc-800"
         >
           <path
             stroke-linejoin="round"
@@ -79,7 +97,11 @@
           ></path>
         </svg>
       </a>
-      <h1 class="m-auto pr-5 text-[1.5rem] font-[500]">Today Expense</h1>
+      <h1
+        class="absolute left-1/2 transform -translate-x-1/2 justify-self-center text-[1.5rem] font-extrabold"
+      >
+        Today Expense
+      </h1>
     </header>
 
     <div class="mt-2 px-4">
@@ -87,44 +109,40 @@
         <h2 id="date" class="text-[1.5rem] font-[500]">16 Aug 2024</h2>
         <h2 id="today-spent" class="text-[1.5rem] font-[500]">1.000.000</h2>
       </div>
-      <div class="flex flex-col">
-        <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-          <div class="inline-block min-w-full sm:px-2 lg:px-8">
-            <div class="overflow-hidden">
-              <table class="min-w-full">
-                <thead class="bg-white border-b">
-                  <tr>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
-                    >
-                      Date
-                    </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
-                    >
-                      Category
-                    </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
-                    >
-                      Amount
-                    </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
-                    >
-                      Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody id="history-table-body"></tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+      <div
+        class="overflow-hidden bg-white rounded-[10px] mt-3 shadow-[0px_4px_4px_rgba(0,0,0,0.25)]"
+      >
+        <table class="min-w-full">
+          <thead class="border-b">
+            <tr>
+              <th
+                scope="col"
+                class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+              >
+                Date
+              </th>
+              <th
+                scope="col"
+                class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+              >
+                Category
+              </th>
+              <th
+                scope="col"
+                class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+              >
+                Amount
+              </th>
+              <th
+                scope="col"
+                class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+              >
+                Description
+              </th>
+            </tr>
+          </thead>
+          <tbody id="history-table-body"></tbody>
+        </table>
       </div>
     </div>
 

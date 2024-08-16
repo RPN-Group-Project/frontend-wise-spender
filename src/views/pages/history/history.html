@@ -25,18 +25,43 @@
     <!-- Sweet Alert v2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                black: "#000000",
+                neutral: "#404040",
+                white: "#FFFFFF",
+              },
+              zinc: {
+                100: "#f4f4f5",
+                200: "#e4e4e7",
+                300: "#d4d4d8",
+                500: "#71717a",
+                800: "#27272a",
+              },
+              error: {
+                500: "#ef4444",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
       body {
         font-family: "Montserrat", sans-serif;
-        background: #ddf5ff;
       }
     </style>
 
     <title>History</title>
   </head>
-  <body>
+  <body class="bg-zinc-100">
     <div
       id="loader-wrapper"
       class="fixed hidden z-50 h-full w-full flex items-center justify-center h-screen z-50 bg-white opacity-90 transition-opacity duration-300 ease-in-out"
@@ -50,10 +75,10 @@
         ></div>
       </div>
     </div>
-    <header class="flex px-4 py-4 items-center justify-between relative">
+    <header class="flex px-4 py-4">
       <a
         href="../index.html"
-        class="pl-2 z-10 text-black cursor-pointer duration-200 hover:scale-125 active:scale-100"
+        class="pl-2 self-center cursor-pointer duration-200 hover:scale-125 active:scale-100"
         title="Go Back"
       >
         <svg
@@ -61,7 +86,7 @@
           width="50px"
           height="50px"
           viewBox="0 0 24 24"
-          class="stroke-blue-300"
+          class="stroke-zinc-800"
         >
           <path
             stroke-linejoin="round"
@@ -109,49 +134,45 @@
       </div>
     </div>
 
-    <div class="flex flex-col mt-2 px-8">
-      <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-        <div class="py-2 inline-block min-w-full sm:px-2 lg:px-8">
-          <div class="overflow-hidden">
-            <table class="min-w-full">
-              <thead class="bg-white border-b">
-                <tr>
-                  <th
-                    scope="col"
-                    class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
-                  >
-                    Date
-                  </th>
-                  <th
-                    scope="col"
-                    class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
-                  >
-                    Category
-                  </th>
-                  <th
-                    scope="col"
-                    class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
-                  >
-                    Amount
-                  </th>
-                  <th
-                    scope="col"
-                    class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
-                  >
-                    Description
-                  </th>
-                </tr>
-              </thead>
-              <tbody id="history-table-body"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+    <div
+      class="overflow-hidden bg-white rounded-[10px] mt-3 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] mx-8"
+    >
+      <table class="min-w-full">
+        <thead class="border-b">
+          <tr>
+            <th
+              scope="col"
+              class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+            >
+              Date
+            </th>
+            <th
+              scope="col"
+              class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+            >
+              Category
+            </th>
+            <th
+              scope="col"
+              class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+            >
+              Amount
+            </th>
+            <th
+              scope="col"
+              class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+            >
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody id="history-table-body"></tbody>
+      </table>
     </div>
 
     <nav
       id="pagination"
-      class="flex flex-wrap items-center justify-center px-4 mt-2"
+      class="flex flex-wrap items-center justify-center px-4 mt-4"
     ></nav>
 
     <footer
@@ -164,17 +185,17 @@
       class="is-flex is-flex-direction-column"
     >
       <div
-        class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600"
+        class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 border rounded-full bottom-4 left-1/2 bg-zinc-800 border-zinc-500"
       >
         <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
           <a
             href="../index.html"
             data-tooltip-target="tooltip-home"
             type="button"
-            class="inline-flex flex-col items-center justify-center px-5 rounded-s-full hover:bg-gray-50 dark:hover:bg-gray-800 group"
+            class="inline-flex flex-col items-center justify-center px-5 rounded-s-full hover:bg-gray-800 group"
           >
             <ion-icon
-              class="w-7 h-7 mb-1 text-gray-400 dark:group-hover:text-blue-500"
+              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-500"
               aria-hidden="true"
               name="home-outline"
             ></ion-icon>
@@ -184,7 +205,7 @@
           <div
             id="tooltip-home"
             role="tooltip"
-            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 rounded-lg shadow-sm opacity-0 tooltip bg-gray-700"
           >
             Home
             <div class="tooltip-arrow" data-popper-arrow></div>
@@ -193,10 +214,10 @@
             href="../tracker/tracker.html"
             data-tooltip-target="tooltip-wallet"
             type="button"
-            class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
+            class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-800 group"
           >
             <ion-icon
-              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-500"
               aria-hidden="true"
               name="apps-outline"
             ></ion-icon>
@@ -205,7 +226,7 @@
           <div
             id="tooltip-wallet"
             role="tooltip"
-            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 rounded-lg shadow-sm opacity-0 tooltip bg-gray-700"
           >
             Wallet
             <div class="tooltip-arrow" data-popper-arrow></div>
@@ -215,7 +236,7 @@
               href="../expenses/add-expense.html"
               data-tooltip-target="tooltip-new"
               type="button"
-              class="inline-flex items-center justify-center w-10 h-10 font-medium bg-blue-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800"
+              class="inline-flex items-center justify-center w-10 h-10 font-medium bg-blue-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none"
             >
               <svg
                 class="w-4 h-4 text-white"
@@ -238,19 +259,19 @@
           <div
             id="tooltip-new"
             role="tooltip"
-            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 rounded-lg shadow-sm opacity-0 tooltip bg-gray-700"
           >
             Create new item
             <div class="tooltip-arrow" data-popper-arrow></div>
           </div>
           <a
-            href="./history.html"
+            href="#"
             data-tooltip-target="tooltip-settings"
             type="button"
-            class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
+            class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-800 group"
           >
             <ion-icon
-              class="w-7 h-7 mb-1 text-blue-600 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+              class="w-7 h-7 mb-1 text-blue-600 group-hover:text-blue-500"
               aria-hidden="true"
               name="clipboard-outline"
             ></ion-icon>
@@ -259,19 +280,19 @@
           <div
             id="tooltip-settings"
             role="tooltip"
-            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 rounded-lg shadow-sm opacity-0 tooltip"
           >
             Settings
             <div class="tooltip-arrow" data-popper-arrow></div>
           </div>
           <a
-            href="./add-expense.html"
+            href="../profile/profile.html"
             data-tooltip-target="tooltip-profile"
             type="button"
-            class="inline-flex flex-col items-center justify-center px-5 rounded-e-full hover:bg-gray-50 dark:hover:bg-gray-800 group"
+            class="inline-flex flex-col items-center justify-center px-5 rounded-e-full hover:bg-gray-800 group"
           >
             <ion-icon
-              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-500"
               aria-hidden="true"
               name="person-outline"
             ></ion-icon>
@@ -280,7 +301,7 @@
           <div
             id="tooltip-profile"
             role="tooltip"
-            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 rounded-lg shadow-sm opacity-0 tooltip bg-gray-700"
           >
             Profile
             <div class="tooltip-arrow" data-popper-arrow></div>

@@ -53,7 +53,7 @@ $(document).ready(function () {
         const sumAllAmount = data
           .map((item) => item.amount)
           .reduce((a, b) => a + b, 0);
-        $("#today-spent").text(numberFormat(sumAllAmount));
+        $("#today-spent").text("Rp. " + numberFormat(sumAllAmount));
 
         let tbody = $("#history-table-body");
         tbody.empty();

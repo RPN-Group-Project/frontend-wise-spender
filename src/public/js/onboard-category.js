@@ -22,7 +22,7 @@ $(document).ready(function () {
       var expenseLimit = response.data.expense_limit;
       var targetExpense = $("#target-expense");
       targetExpense.html(`
-                    ${expenseLimit}
+                    ${numberFormat(expenseLimit)}
                 `);
     },
     error: function () {
@@ -121,7 +121,6 @@ $(document).ready(function () {
       },
       data: JSON.stringify({ name: name, monthly_budget: monthlyBudget }),
       success: function (response) {
-        console.log(response);
         $(".loading-overlay").show();
         location.reload();
       },
