@@ -9,6 +9,10 @@ $(document).ready(function () {
     window.location.href = "./auth/login.html";
   }
 
+  if (localStorage.getItem("userName")) {
+    $("#username").text(localStorage.getItem("userName"));
+  }
+
   const disableScroll = () => {
     $(window).on("scroll.disableScroll", function (event) {
       event.preventDefault();
@@ -102,7 +106,7 @@ $(document).ready(function () {
       .fail((jqXHR, textStatus, errorThrown) => {
         hideLoader();
         if (jqXHR.status === 401) {
-          location.replace("login.html");
+          window.location.href = "./auth/login.html";
         }
       });
   };
@@ -180,7 +184,7 @@ $(document).ready(function () {
       .fail((jqXHR, textStatus, errorThrown) => {
         hideLoader();
         if (jqXHR.status === 401) {
-          location.replace("login.html");
+          window.location.href = "./auth/login.html";
         }
       });
   };
@@ -210,7 +214,7 @@ $(document).ready(function () {
       .fail((jqXHR, textStatus, errorThrown) => {
         hideLoader();
         if (jqXHR.status === 401) {
-          location.replace("login.html");
+          window.location.href = "./auth/login.html";
         }
       });
   };
