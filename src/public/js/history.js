@@ -3,9 +3,9 @@ import expenseTableBody from "./components/expenseTable.js";
 
 $(document).ready(function () {
   // auto redirect to login if no token detected'
-  // if (!localStorage.getItem("tokenAuth")) {
-  //     window.location.href = "./login.html";
-  // }
+  if (!localStorage.getItem("token")) {
+    window.location.href = "./auth/login.html";
+  }
 
   const disableScroll = () => {
     $(window).on("scroll.disableScroll", function (event) {
@@ -73,7 +73,7 @@ $(document).ready(function () {
       .fail((jqXHR, textStatus, errorThrown) => {
         hideLoader();
         if (jqXHR.status === 401) {
-          location.replace("login.html");
+          window.location.href = "./auth/login.html";
         }
       });
   });
@@ -102,7 +102,7 @@ $(document).ready(function () {
       .fail((jqXHR, textStatus, errorThrown) => {
         hideLoader();
         if (jqXHR.status === 401) {
-          location.replace("login.html");
+          window.location.href = "./auth/login.html";
         }
       });
   };
