@@ -48,6 +48,19 @@
     <title>Dashboard | Expense Tracker</title>
   </head>
   <body>
+    <div
+      id="loader-wrapper"
+      class="fixed hidden z-50 h-full w-full flex items-center justify-center h-screen z-50 bg-white opacity-90 transition-opacity duration-300 ease-in-out"
+    >
+      <div class="relative">
+        <div
+          class="h-24 w-24 rounded-full border-t-8 border-b-8 border-gray-200"
+        ></div>
+        <div
+          class="absolute top-0 left-0 h-24 w-24 rounded-full border-t-8 border-b-8 border-blue-500 animate-spin"
+        ></div>
+      </div>
+    </div>
     <section
       style="
         background-image: url('../../public/assets/cool-backgroung.png');

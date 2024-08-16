@@ -174,6 +174,8 @@ $(document).ready(function () {
             },
           },
         });
+
+        hideLoader();
       })
       .fail((jqXHR, textStatus, errorThrown) => {
         hideLoader();
