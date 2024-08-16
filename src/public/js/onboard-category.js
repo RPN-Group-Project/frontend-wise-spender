@@ -4,6 +4,11 @@ const userUrl = `${BASE_URL}/v1/users/`;
 const categoryUrl = `${BASE_URL}/v1/category/`;
 
 $(document).ready(function () {
+  // auto redirect to login if no token detected'
+  if (!localStorage.getItem("token")) {
+    window.location.href = "./auth/login.html";
+  }
+
   const userId = localStorage.getItem("userId");
   const authToken = localStorage.getItem("token");
   $.ajax({
