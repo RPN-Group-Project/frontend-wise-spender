@@ -17,6 +17,31 @@
     <!-- Sweet Alert v2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                black: "#000000",
+                neutral: "#404040",
+                white: "#FFFFFF",
+              },
+              zinc: {
+                100: "#f4f4f5",
+                200: "#e4e4e7",
+                300: "#d4d4d8",
+                500: "#71717a",
+                800: "#27272a",
+              },
+              error: {
+                500: "#ef4444",
+              },
+            },
+          },
+        },
+      };
+    </script>
     <title>Add Expense</title>
   </head>
   <body>
@@ -31,7 +56,7 @@
           width="50px"
           height="50px"
           viewBox="0 0 24 24"
-          class="stroke-blue-300"
+          class="stroke-zinc-800"
         >
           <path
             stroke-linejoin="round"
@@ -94,14 +119,14 @@
 
           <div>
             <button
-              class="rounded-lg w-full relative h-10 cursor-pointer flex items-center border border-blue-500 bg-blue-500 group hover:bg-blue-500 active:bg-blue-500 active:border-blue-500"
+              class="rounded-lg w-full relative h-10 cursor-pointer flex items-center border border-zinc-800 bg-zinc-500 group hover:bg-zinc-500 active:bg-zinc-500 active:border-zinc-500"
             >
               <span
                 class="text-gray-200 font-semibold ml-8 transform group-hover:translate-x-60 transition-all duration-300"
                 >Add
               </span>
               <span
-                class="absolute right-0 h-full w-10 rounded-lg bg-blue-500 flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-300"
+                class="absolute right-0 h-full w-10 rounded-lg bg-zinc-500 flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-300"
               >
                 <svg
                   class="svg w-8 text-white"
