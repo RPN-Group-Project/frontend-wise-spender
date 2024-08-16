@@ -3,6 +3,17 @@ import expenseTableBody from "./components/expenseTable.js";
 import getStartAndEndOfWeek from "./utils/getStartAndEndOfWeek.js";
 import groupByDayAndSum from "./utils/groupByDayAndSum.js";
 import numberFormat from "./utils/numberFormat.js";
+
+const now = new Date();
+const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1)
+  .toISOString()
+  .split("T")[0];
+const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0)
+  .toISOString()
+  .split("T")[0];
+
+console.log(startOfMonth, endOfMonth);
+
 $(document).ready(function () {
   // auto redirect to login if no token detected'
   if (!localStorage.getItem("token")) {
@@ -45,7 +56,7 @@ $(document).ready(function () {
     showLoader();
 
     apiService
-      .get("expense/user/sum")
+      .get(`expense/user/sum?startDate=${startOfMonth}&endDate=${endOfMonth}`)
       .done((response) => {
         const { data } = response;
         const expenses = data.expenses._sum.amount;
