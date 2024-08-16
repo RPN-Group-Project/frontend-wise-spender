@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Onboarding - Category</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link
@@ -12,6 +11,10 @@
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Montserrat:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
     />
     <script>
@@ -39,7 +42,6 @@
         },
       };
     </script>
-
     <style>
       .font-roboto {
         font-family: "Roboto", sans-serif;
@@ -50,14 +52,37 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Category</title>
   </head>
-  <body class="bg-zinc-100 h-screen flex flex-col">
-    <!-- Header -->
-    <header class="flex px-4 py-4 items-center justify-center">
-      <h1 class="text-center text-[1.5rem] font-extrabold">Add Category</h1>
+  <body class="bg-zinc-100">
+    <header class="flex px-4 py-4">
+      <a
+        href="./tracker.html"
+        class="pl-2 self-center cursor-pointer duration-200 hover:scale-125 active:scale-100"
+        title="Go Back"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="50px"
+          height="50px"
+          viewBox="0 0 24 24"
+          class="stroke-zinc-800"
+        >
+          <path
+            stroke-linejoin="round"
+            stroke-linecap="round"
+            stroke-width="1.5"
+            d="M11 6L5 12M5 12L11 18M5 12H19"
+          ></path>
+        </svg>
+      </a>
+      <h1
+        class="absolute left-1/2 transform -translate-x-1/2 justify-self-center text-[1.5rem] font-extrabold"
+      >
+        Category
+      </h1>
     </header>
 
-    <!-- Main Content -->
     <main class="flex-grow flex items-center justify-center p-4">
       <div class="w-full max-w-md p-6 flex flex-col items-center space-y-6">
         <div class="text-center">
@@ -105,7 +130,7 @@
             <!-- Add Button -->
             <button
               type="submit"
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5"
+              class="text-white bg-zinc-500 hover:bg-zinc-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5"
             >
               Add
             </button>
@@ -114,15 +139,6 @@
 
         <!-- Table -->
         <div id="table-category" class="relative overflow-x-auto w-full"></div>
-        <div class="text-center">
-          <button
-            id="continueButton"
-            type="submit"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5"
-          >
-            Continue
-          </button>
-        </div>
       </div>
     </main>
     <script type="module" src="../../../public/js/onboard-category.js"></script>

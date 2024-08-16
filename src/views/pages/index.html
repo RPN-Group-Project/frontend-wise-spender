@@ -25,28 +25,67 @@
     <!-- local module -->
     <script type="module" src="../../public/js/home.js"></script>
 
-    <!-- toastr -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- Sweet Alert v2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
       body {
         font-family: "Montserrat", sans-serif;
-        background: #ddf5ff;
+      }
+
+      .custom-gradient {
+        background: linear-gradient(to right, rgb(17, 24, 39), rgb(75, 85, 99));
       }
     </style>
 
+    <!-- Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                black: "#000000",
+                neutral: "#404040",
+                white: "#FFFFFF",
+              },
+              zinc: {
+                100: "#f4f4f5",
+                200: "#e4e4e7",
+                300: "#d4d4d8",
+                500: "#71717a",
+                800: "#27272a",
+              },
+              error: {
+                500: "#ef4444",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
     <title>Dashboard | Expense Tracker</title>
   </head>
-  <body>
+  <body class="bg-zinc-100">
+    <div
+      id="loader-wrapper"
+      class="fixed hidden z-50 h-full w-full flex items-center justify-center h-screen z-50 bg-white opacity-90 transition-opacity duration-300 ease-in-out"
+    >
+      <div class="relative">
+        <div
+          class="h-24 w-24 rounded-full border-t-8 border-b-8 border-gray-200"
+        ></div>
+        <div
+          class="absolute top-0 left-0 h-24 w-24 rounded-full border-t-8 border-b-8 border-blue-500 animate-spin"
+        ></div>
+      </div>
+    </div>
     <section
       style="
-        background-image: url('../../public/assets/cool-backgroung.png');
+        background-image: url('../../public/assets/zinc-bg.png');
         background-repeat: no-repeat;
         background-size: 100% 75%;
       "
@@ -54,9 +93,9 @@
     >
       <header class="flex justify-between align-center">
         <h2 class="text-[1rem] font-bold">
-          Hello, <span id="username">Name</span>
+          Hello, <span id="username" class="text-white"> Spender</span>
         </h2>
-        <nav>
+        <nav class="text-white">
           <a class="inline-block" href="#">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -75,13 +114,14 @@
               />
             </svg>
           </a>
-          <a href="#" class="text-dark inline-block">
+          <a href="./profile/profile.html" class="inline-block">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="ionicon"
               viewBox="0 0 512 512"
               width="25"
               height="25"
+              fill="#FFFFFF"
             >
               <path
                 d="M258.9 48C141.92 46.42 46.42 141.92 48 258.9c1.56 112.19 92.91 203.54 205.1 205.1 117 1.6 212.48-93.9 210.88-210.88C462.44 140.91 371.09 49.56 258.9 48zm126.42 327.25a4 4 0 01-6.14-.32 124.27 124.27 0 00-32.35-29.59C321.37 329 289.11 320 256 320s-65.37 9-90.83 25.34a124.24 124.24 0 00-32.35 29.58 4 4 0 01-6.14.32A175.32 175.32 0 0180 259c-1.63-97.31 78.22-178.76 175.57-179S432 158.81 432 256a175.32 175.32 0 01-46.68 119.25z"
@@ -95,7 +135,7 @@
       </header>
 
       <div
-        class="custom-gradient mt-3 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-[10px] text-white p-3 flex justify-between align-center"
+        class="custom-gradient mx-auto lg:w-1/2 mt-3 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-[10px] text-white p-3 flex justify-between align-center"
       >
         <div>
           <div class="money-spent">
@@ -112,22 +152,21 @@
         <div class="self-center relative w-32 h-32">
           <canvas class="z-40" id="chartDoughnut"></canvas>
           <div
-            class="w-28 h-28 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600 text-center flex align-center justify-center text-white font-bold"
+            class="w-28 h-28 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-zinc-500 text-center flex align-center justify-center text-white font-bold"
           >
-            <span id="chartDoughnut-text" class="m-auto">0%</span>
+            <span id="dashboard-percentage" class="m-auto">Infinity%</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="alert" class="alert hidden px-4">
+    <section id="alert" class="alert px-4">
       <div
-        class="bg-red-100 mt-3 border border-red-400 text-red-700 px-4 py-3 rounded relative max-[375px]:text-[0.875rem]"
+        id="alert-container"
+        class="hidden mt-3 border px-4 py-3 rounded relative max-[375px]:text-[0.875rem]"
         role="alert"
       >
-        <span id="alert-text" class="block sm:inline"
-          >Looks like you boros enough.</span
-        >
+        <span id="alert-text" class="block sm:inline"></span>
         <span
           id="alert-close-button"
           class="absolute top-0 bottom-0 right-0 px-4 py-3"
@@ -152,158 +191,118 @@
       <nav class="flex justify-between mt-[1.125rem]">
         <a
           class="text-dark shortcut-link flex flex-col align-center px-2"
-          href="../components/add-expense-modal.html"
+          href="./expenses/add-expense.html"
         >
           <ion-icon
             class="w-[30px] h-[30px] self-center transform transition-transform duration-300 hover:scale-110"
             name="wallet-outline"
           ></ion-icon>
-          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-600">
+          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-800">
             Add Expense
           </p>
         </a>
         <a
           class="text-dark shortcut-link flex flex-col align-center px-2"
-          href="../components/add-category-modal.html"
+          href="./tracker/category.html"
         >
           <ion-icon
             name="folder-outline"
             class="w-[30px] h-[30px] self-center transform transition-transform duration-300 hover:scale-110"
           ></ion-icon>
-          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-600">
+          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-800">
             Add Category
           </p>
         </a>
         <a
-          href="../history.html"
+          href="./history/history.html"
           class="text-dark shortcut-link flex flex-col align-center px-2"
         >
           <ion-icon
             name="clipboard-outline"
             class="w-[30px] h-[30px] self-center transform transition-transform duration-300 hover:scale-110"
           ></ion-icon>
-          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-600">
+          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-800">
             History
           </p>
         </a>
         <a
-          href="../limit-expense.html"
+          href="./profile/targetExpense.html"
           class="text-dark shortcut-link flex flex-col align-center px-2"
         >
           <ion-icon
             name="settings-outline"
             class="w-[30px] h-[30px] self-center transform transition-transform duration-300 hover:scale-110"
           ></ion-icon>
-          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-600">
+          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-800">
             Limit Expense
           </p>
         </a>
       </nav>
     </section>
-
-    <section class="history px-4 mt-4">
-      <div class="flex justify-between">
-        <h1 class="text-[1rem] font-[500]">History</h1>
-        <a href="./history.html" class="text-[0.875rem] text-blue-600"
-          ><div
-            class="group hover:text-sky-600 transition ease-in-out duration-200"
-          >
-            See All
-            <span
-              aria-hidden="true"
-              class="inline-block translate-x-0 group-hover:translate-x-1 transition-transform ease-in-out duration-200"
-              >→</span
-            >
-          </div></a
+    <div class="lg:flex">
+      <section class="px-4 py-2 mt-2 lg:w-1/2">
+        <h1 class="text-[1rem] font-[500]">Expense Chart Week</h1>
+        <div
+          class="shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-[10px] bg-white mt-3 p-2"
         >
-      </div>
-
-      <div class="flex flex-col mt-2">
-        <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-          <div class="py-2 inline-block min-w-full sm:px-4 lg:px-8">
-            <div class="overflow-hidden">
-              <table class="min-w-full">
-                <thead class="bg-white border-b">
-                  <tr>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-4 py-4 text-left"
-                    >
-                      Date
-                    </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-4 py-4 text-left"
-                    >
-                      Category
-                    </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-4 py-4 text-left"
-                    >
-                      Price
-                    </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-4 py-4 text-left"
-                    >
-                      Action
-                    </th>
-                  </tr>
-                </thead>
-                <tbody id="history-table-body">
-                  <tr class="bg-white border-b">
-                    <td
-                      class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
-                    >
-                      1 Aug
-                    </td>
-                    <td
-                      class="text-sm text-gray-900 font-light px-4 py-4 whitespace-nowrap"
-                    >
-                      <a
-                        href="#"
-                        class="underline underline-offset-[3px] text-blue-600 hover:no-underline hover:bg-[url(&#x27;https://snippets.alexandru.so/squiggle.svg&#x27;)]"
-                      >
-                        Entertainment
-                      </a>
-                    </td>
-                    <td
-                      class="text-sm text-gray-900 font-light px-4 py-4 whitespace-nowrap"
-                    >
-                      500.000
-                    </td>
-                    <td
-                      class="text-[0.75rem] text-blue-600 font-light px-4 py-4 whitespace-nowrap"
-                    >
-                      <div
-                        class="group hover:text-sky-600 transition ease-in-out duration-200"
-                      >
-                        Details
-                        <span
-                          aria-hidden="true"
-                          class="inline-block translate-x-0 group-hover:translate-x-1 transition-transform ease-in-out duration-200"
-                          >→</span
-                        >
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <canvas id="myChart" class="mt-3"></canvas>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="px-4 py-2 mt-2">
-      <h1 class="text-[1rem] font-[500]">Expense Chart Week</h1>
-      <div
-        class="shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-[10px] bg-white mt-3 p-2"
-      >
-        <canvas id="myChart" class="mt-3"></canvas>
-      </div>
-    </section>
+      <section class="history px-4 mt-4 lg:w-1/2">
+        <div class="flex justify-between">
+          <h1 class="text-[1rem] font-[500]">History</h1>
+          <a href="./history/history.html" class="text-[0.875rem] text-blue-800"
+            ><div
+              class="group hover:text-sky-600 transition ease-in-out duration-200"
+            >
+              See More
+              <span
+                aria-hidden="true"
+                class="inline-block translate-x-0 group-hover:translate-x-1 transition-transform ease-in-out duration-200"
+                >→</span
+              >
+            </div></a
+          >
+        </div>
+
+        <div
+          class="overflow-hidden bg-white rounded-[10px] mt-3 shadow-[0px_4px_4px_rgba(0,0,0,0.25)]"
+        >
+          <table class="min-w-full">
+            <thead class="border-b">
+              <tr>
+                <th
+                  scope="col"
+                  class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+                >
+                  Date
+                </th>
+                <th
+                  scope="col"
+                  class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+                >
+                  Category
+                </th>
+                <th
+                  scope="col"
+                  class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+                >
+                  Amount
+                </th>
+                <th
+                  scope="col"
+                  class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+                >
+                  Description
+                </th>
+              </tr>
+            </thead>
+            <tbody id="history-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
     <footer
       id="footer"
       style="
@@ -314,10 +313,11 @@
       class="is-flex is-flex-direction-column"
     >
       <div
-        class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600"
+        class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 border rounded-full bottom-4 left-1/2 bg-zinc-800 border-zinc-500"
       >
         <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
-          <button
+          <a
+            href="#"
             data-tooltip-target="tooltip-home"
             type="button"
             class="inline-flex flex-col items-center justify-center px-5 rounded-s-full hover:bg-gray-50 dark:hover:bg-gray-800 group"
@@ -329,7 +329,7 @@
             ></ion-icon>
 
             <span class="sr-only">Home</span>
-          </button>
+          </a>
           <div
             id="tooltip-home"
             role="tooltip"
@@ -338,18 +338,19 @@
             Home
             <div class="tooltip-arrow" data-popper-arrow></div>
           </div>
-          <button
+          <a
+            href="./tracker/tracker.html"
             data-tooltip-target="tooltip-wallet"
             type="button"
             class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
           >
             <ion-icon
-              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-800 dark:group-hover:text-blue-500"
               aria-hidden="true"
               name="apps-outline"
             ></ion-icon>
             <span class="sr-only">Menu</span>
-          </button>
+          </a>
           <div
             id="tooltip-wallet"
             role="tooltip"
@@ -359,7 +360,8 @@
             <div class="tooltip-arrow" data-popper-arrow></div>
           </div>
           <div class="flex items-center justify-center">
-            <button
+            <a
+              href="./expenses/add-expense.html"
               data-tooltip-target="tooltip-new"
               type="button"
               class="inline-flex items-center justify-center w-10 h-10 font-medium bg-blue-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800"
@@ -380,7 +382,7 @@
                 />
               </svg>
               <span class="sr-only">New item</span>
-            </button>
+            </a>
           </div>
           <div
             id="tooltip-new"
@@ -390,18 +392,19 @@
             Create new item
             <div class="tooltip-arrow" data-popper-arrow></div>
           </div>
-          <button
+          <a
+            href="./history/history.html"
             data-tooltip-target="tooltip-settings"
             type="button"
             class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
           >
             <ion-icon
-              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-800 dark:group-hover:text-blue-500"
               aria-hidden="true"
               name="clipboard-outline"
             ></ion-icon>
             <span class="sr-only">Settings</span>
-          </button>
+          </a>
           <div
             id="tooltip-settings"
             role="tooltip"
@@ -417,12 +420,16 @@
             class="inline-flex flex-col items-center justify-center px-5 rounded-e-full hover:bg-gray-50 dark:hover:bg-gray-800 group"
           >
             <ion-icon
-              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-800 dark:group-hover:text-blue-500"
               aria-hidden="true"
               name="person-outline"
             ></ion-icon>
             <span class="sr-only">Profile</span>
+<<<<<<< HEAD
         </a>
+=======
+          </a>
+>>>>>>> 832193e33f8b0cff7c78a6b18ff06daa341c162a
           <div
             id="tooltip-profile"
             role="tooltip"
