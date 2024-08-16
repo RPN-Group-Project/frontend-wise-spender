@@ -12,7 +12,7 @@ const expenseTableBody = (date, category, amount, description) => {
                     >
                       <a
                         href="./category.html"
-                        class="underline underline-offset-[3px] text-blue-600 hover:no-underline hover:bg-[url(&#x27;https://snippets.alexandru.so/squiggle.svg&#x27;)]"
+                        class="underline underline-offset-[3px] text-blue-800 hover:text-zinc-500 hover:no-underline hover:bg-[url(&#x27;https://snippets.alexandru.so/squiggle.svg&#x27;)]"
                       >
                         ${category}
                       </a>
