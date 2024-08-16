@@ -33,7 +33,6 @@
 
       body {
         font-family: "Montserrat", sans-serif;
-        background: #ffffff;
       }
 
       .custom-gradient {
@@ -70,7 +69,7 @@
 
     <title>Dashboard | Expense Tracker</title>
   </head>
-  <body>
+  <body class="bg-zinc-100">
     <div
       id="loader-wrapper"
       class="fixed hidden z-50 h-full w-full flex items-center justify-center h-screen z-50 bg-white opacity-90 transition-opacity duration-300 ease-in-out"
@@ -241,7 +240,7 @@
       </nav>
     </section>
     <div class="lg:flex">
-      <section class="px-4 py-2 lg:mt-4 mt-2 lg:w-1/2">
+      <section class="px-4 py-2 mt-2 lg:w-1/2">
         <h1 class="text-[1rem] font-[500]">Expense Chart Week</h1>
         <div
           class="shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-[10px] bg-white mt-3 p-2"
@@ -267,44 +266,40 @@
           >
         </div>
 
-        <div class="flex flex-col">
-          <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-            <div class="py-2 inline-block min-w-full sm:px-2 lg:px-8">
-              <div class="overflow-hidden">
-                <table class="min-w-full">
-                  <thead class="bg-white border-b">
-                    <tr>
-                      <th
-                        scope="col"
-                        class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
-                      >
-                        Date
-                      </th>
-                      <th
-                        scope="col"
-                        class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
-                      >
-                        Category
-                      </th>
-                      <th
-                        scope="col"
-                        class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
-                      >
-                        Amount
-                      </th>
-                      <th
-                        scope="col"
-                        class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
-                      >
-                        Description
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody id="history-table-body"></tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+        <div
+          class="overflow-hidden bg-white rounded-[10px] mt-3 shadow-[0px_4px_4px_rgba(0,0,0,0.25)]"
+        >
+          <table class="min-w-full">
+            <thead class="border-b">
+              <tr>
+                <th
+                  scope="col"
+                  class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+                >
+                  Date
+                </th>
+                <th
+                  scope="col"
+                  class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+                >
+                  Category
+                </th>
+                <th
+                  scope="col"
+                  class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+                >
+                  Amount
+                </th>
+                <th
+                  scope="col"
+                  class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+                >
+                  Description
+                </th>
+              </tr>
+            </thead>
+            <tbody id="history-table-body"></tbody>
+          </table>
         </div>
       </section>
     </div>
