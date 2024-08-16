@@ -2,7 +2,7 @@ import apiService from "./apiService.js";
 import expenseTableBody from "./components/expenseTable.js";
 import getStartAndEndOfWeek from "./utils/getStartAndEndOfWeek.js";
 import groupByDayAndSum from "./utils/groupByDayAndSum.js";
-
+import numberFormat from "./utils/numberFormat.js";
 $(document).ready(function () {
   // auto redirect to login if no token detected'
   if (!localStorage.getItem("token")) {
@@ -52,7 +52,7 @@ $(document).ready(function () {
         const limit = data.userExpenseLimit.expense_limit;
         const expensePercentage = (expenses / limit) * 100;
         console.log(expenses, limit, expensePercentage);
-        $("#money-spent").text(expenses);
+        $("#money-spent").text(numberFormat(expenses));
         $("#limit-expense").text(limit);
         $("#dashboard-percentage").text(expensePercentage + "%");
 

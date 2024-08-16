@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- ionicon -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <!-- local module -->
+    <script type="module" src="../../../public/js/today-expense.js"></script>
+
+    <!-- toastr -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        background: #ddf5ff;
+      }
+
+      .custom-gradient {
+        background: linear-gradient(180.64deg, #050c9c 27.95%, #3572ef 99.45%);
+      }
+    </style>
+
+    <title>Today Expense</title>
+  </head>
+  <body>
+    <div
+      id="loader-wrapper"
+      class="fixed hidden z-50 h-full w-full flex items-center justify-center h-screen z-50 bg-white opacity-90 transition-opacity duration-300 ease-in-out"
+    >
+      <div class="relative">
+        <div
+          class="h-24 w-24 rounded-full border-t-8 border-b-8 border-gray-200"
+        ></div>
+        <div
+          class="absolute top-0 left-0 h-24 w-24 rounded-full border-t-8 border-b-8 border-blue-500 animate-spin"
+        ></div>
+      </div>
+    </div>
+    <header class="flex px-4 py-4">
+      <a
+        href="../pages/index.html"
+        class="pl-2 self-center cursor-pointer duration-200 hover:scale-125 active:scale-100"
+        title="Go Back"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="50px"
+          height="50px"
+          viewBox="0 0 24 24"
+          class="stroke-blue-300"
+        >
+          <path
+            stroke-linejoin="round"
+            stroke-linecap="round"
+            stroke-width="1.5"
+            d="M11 6L5 12M5 12L11 18M5 12H19"
+          ></path>
+        </svg>
+      </a>
+      <h1 class="m-auto pr-5 text-[1.5rem] font-[500]">Today Expense</h1>
+    </header>
+
+    <div class="mt-2 px-4">
+      <div class="flex px-1 items-center justify-between mb-2">
+        <h2 id="date" class="text-[1.5rem] font-[500]">16 Aug 2024</h2>
+        <h2 id="today-spent" class="text-[1.5rem] font-[500]">1.000.000</h2>
+      </div>
+      <div class="flex flex-col">
+        <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+          <div class="inline-block min-w-full sm:px-2 lg:px-8">
+            <div class="overflow-hidden">
+              <table class="min-w-full">
+                <thead class="bg-white border-b">
+                  <tr>
+                    <th
+                      scope="col"
+                      class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+                    >
+                      Date
+                    </th>
+                    <th
+                      scope="col"
+                      class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+                    >
+                      Category
+                    </th>
+                    <th
+                      scope="col"
+                      class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+                    >
+                      Amount
+                    </th>
+                    <th
+                      scope="col"
+                      class="text-sm font-medium text-gray-900 px-2 py-4 text-left"
+                    >
+                      Description
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="history-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav
+      id="pagination"
+      class="flex flex-wrap items-center justify-center px-4 mt-2"
+    ></nav>
+  </body>
+</html>
