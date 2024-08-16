@@ -1,6 +1,7 @@
+import numberFormat from "./utils/numberFormat.js";
+
 const BASE_URL = "http://localhost:3000";
 const userUrl = `${BASE_URL}/v1/users/`;
-
 const categoryUrl = `${BASE_URL}/v1/category/`;
 
 $(document).ready(function () {
@@ -67,7 +68,7 @@ $(document).ready(function () {
                                     ${cat.name}
                                 </th>
                                 <td class="px-6 py-4">
-                                    ${cat.monthly_budget}
+                                    ${numberFormat(cat.monthly_budget)}
                                 </td>
                                 <td class="px-6 py-4 text-right">
                                     <a href="#" style="color: #ffcc00;" class="mr-2 font-medium hover:underline">Edit</a>
