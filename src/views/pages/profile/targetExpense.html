@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../public/css/style.css" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- ionicon -->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
 
     <!-- local module -->
-    <script type="module" src="../../public/js/home.js"></script>
+    <script type="module" src="../../../public/js/targetExpense.js"></script>
 
     <!-- toastr -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <!-- Auto Numeric -->
@@ -27,58 +38,107 @@
     https://cdn.jsdelivr.net/npm/autonumeric@4.10.5/dist/autoNumeric.min.js
     "></script>
 
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                black: "#000000",
+                neutral: "#404040",
+                white: "#FFFFFF",
+              },
+              zinc: {
+                100: "#f4f4f5",
+                200: "#e4e4e7",
+                300: "#d4d4d8",
+                500: "#71717a",
+                800: "#27272a",
+              },
+              error: {
+                500: "#ef4444",
+              },
+            },
+          },
+        },
+      };
+    </script>
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
-        body {
-            font-family: "Montserrat", sans-serif;
-            background: #ddf5ff;
-        }
+      body {
+        font-family: "Montserrat", sans-serif;
+      }
     </style>
 
-    <title>Dashboard | Expense Tracker</title>
-</head>
+    <title>Target Expense | Expense Tracker</title>
+  </head>
 
-<body class="h-screen overflow-hidden">
-
+  <body class="h-screen overflow-hidden bg-zinc-100">
     <div class="flex flex-col h-screen">
+      <!-- Header -->
+      <header class="flex px-4 py-4">
+        <a
+          href="./profile.html"
+          class="pl-2 self-center cursor-pointer duration-200 hover:scale-125 active:scale-100"
+          title="Go Back"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="50px"
+            height="50px"
+            viewBox="0 0 24 24"
+            class="stroke-zinc-800"
+          >
+            <path
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              stroke-width="1.5"
+              d="M11 6L5 12M5 12L11 18M5 12H19"
+            ></path>
+          </svg>
+        </a>
+        <h1
+          class="absolute left-1/2 transform -translate-x-1/2 justify-self-center text-[1.5rem] font-extrabold"
+        >
+          Target Expense
+        </h1>
+      </header>
 
-        <!-- Header -->
-    <section>
-        <div class="flex justify-between mt-3">
-            <a class="" href="./profile.html"
-                class="pl-2 self-center cursor-pointer duration-200 hover:scale-125 active:scale-100"
-                title="Go Back">
-                <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 24 24"
-                    class="stroke-blue-300">
-                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5"
-                    d="M11 6L5 12M5 12L11 18M5 12H19"></path>
-                </svg>
-            </a>
-            <div class="text-center mt-2 flex-1 mr-5">
-                <h1 class="font-bold text-2xl">Set Target Expense</h1>
+      <div class="h-full flex items-center justify-center">
+        <!-- Body input -->
+        <div class="w-full max-w-md p-6 flex flex-col items-center space-y-6">
+          <form id="expense-form" class="w-full">
+            <div class="mb-4">
+              <input
+                type="number"
+                id="expense"
+                name="expense"
+                placeholder="Enter amount of target expense"
+                class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-1"
+                required
+              />
             </div>
+            <div
+              id="error-message"
+              class="hidden p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg"
+              role="alert"
+            >
+              <span class="font-medium">Error!</span>
+              <span id="error-text"></span>
+            </div>
+            <div class="text-center">
+              <button
+                type="submit"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5"
+              >
+                Continue
+              </button>
+            </div>
+          </form>
         </div>
-    </section>
-
-    
-   <!-- Body input -->
-    <section class="flex flex-1 flex-col items-center justify-center">
-        <p class="mb-4">Allocate your budget for this month</p>
-        <form id="expense-form" class="flex flex-col items-center space-y-2">
-                <input id="expense-input" name="amount" placeholder="Rp.0" class="mb-4" type="text">
-                <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none" type="submit">
-                    Submit
-                </button>
-            
-        </form>
-    </section>
-
-    
-
- 
-</div>
-<script src="../../../public/js/inputExpense.js"></script>
-</body>
-
+      </div>
+    </div>
+    <script src="../../../public/js/inputExpense.js"></script>
+  </body>
 </html>
