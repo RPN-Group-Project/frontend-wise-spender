@@ -121,6 +121,14 @@ $(document).ready(function () {
         hideLoader();
         if (jqXHR.status === 401) {
           window.location.href = "./auth/login.html";
+        } else if (jqXHR.status !== 401) {
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "We couldn't fetch data. Please try again later",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       });
   };
@@ -199,6 +207,14 @@ $(document).ready(function () {
         hideLoader();
         if (jqXHR.status === 401) {
           window.location.href = "./auth/login.html";
+        } else if (jqXHR.status !== 401) {
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "We couldn't fetch data. Please try again later",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       });
   };
@@ -228,6 +244,14 @@ $(document).ready(function () {
         hideLoader();
         if (jqXHR.status === 401) {
           window.location.href = "./auth/login.html";
+        } else if (jqXHR.status !== 401) {
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "We couldn't fetch data. Please try again later",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       });
   };
