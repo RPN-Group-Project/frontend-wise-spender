@@ -1,5 +1,5 @@
 import dateFormater from "../utils/dateFormater.js";
-
+import numberFormat from "../utils/numberFormat.js";
 const expenseTableBody = (date, category, amount, description) => {
   return `<tr class="bg-white border-b">
                     <td
@@ -20,7 +20,7 @@ const expenseTableBody = (date, category, amount, description) => {
                     <td
                       class="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap"
                     >
-                      ${amount}
+                      ${numberFormat(amount)}
                     </td>
                     <td
                       class="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap"
