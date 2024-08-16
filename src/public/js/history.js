@@ -1,5 +1,6 @@
 import apiService from "./apiService.js";
 import expenseTableBody from "./components/expenseTable.js";
+import pagination from "./components/pagination.js";
 
 $(document).ready(function () {
   // auto redirect to login if no token detected'
@@ -55,6 +56,7 @@ $(document).ready(function () {
       .get(`expense/user?take=7&startDate=${startDate}&endDate=${endDate}`)
       .done((response) => {
         const { data } = response;
+
         let tbody = $("#history-table-body");
         tbody.empty();
         data.forEach((item) => {
@@ -79,12 +81,13 @@ $(document).ready(function () {
   });
 
   // Fetch history
-  const fetchHistory = () => {
+  const fetchHistory = (page = 1) => {
     showLoader();
     apiService
-      .get("expense/user?take=7")
+      .get(`expense/user?take=7&page=${page}`)
       .done((response) => {
-        const { data } = response;
+        console.log(response);
+        const { data, metadata } = response;
         let tbody = $("#history-table-body");
         tbody.empty();
         hideLoader();
@@ -97,6 +100,12 @@ $(document).ready(function () {
               item.description
             )
           );
+        });
+        $("#pagination").empty();
+        $("#pagination").append(pagination(metadata));
+        $("li").on("click", function () {
+          const page = $(this).data("value");
+          fetchHistory(page);
         });
       })
       .fail((jqXHR, textStatus, errorThrown) => {
