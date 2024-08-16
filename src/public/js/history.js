@@ -47,7 +47,11 @@ $(document).ready(function () {
     const startDate = $("#start-date").val();
     const endDate = $("#end-date").val();
     if (startDate > endDate) {
-      alert("Start Date cannot be greater than End Date");
+      Swal.fire({
+        title: "Oops!",
+        text: "End date cannot more than start date",
+        icon: "warning",
+      });
       $("#end-date").val(todayString);
       return;
     }
@@ -76,6 +80,14 @@ $(document).ready(function () {
         hideLoader();
         if (jqXHR.status === 401) {
           window.location.href = "../auth/login.html";
+        } else if (jqXHR.status !== 401) {
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "We couldn't fetch data. Please try again later",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       });
   });
@@ -112,6 +124,14 @@ $(document).ready(function () {
         hideLoader();
         if (jqXHR.status === 401) {
           window.location.href = "../auth/login.html";
+        } else if (jqXHR.status !== 401) {
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "We couldn't fetch data. Please try again later",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       });
   };
