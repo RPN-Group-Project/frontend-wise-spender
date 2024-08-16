@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../public/css/style.css" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- ionicon -->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
 
     <!-- local module -->
     <script type="module" src="../../public/js/home.js"></script>
 
     <!-- toastr -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <!-- Auto Numeric -->
@@ -28,57 +39,68 @@
     "></script>
 
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
-        body {
-            font-family: "Montserrat", sans-serif;
-            background: #ddf5ff;
-        }
+      body {
+        font-family: "Montserrat", sans-serif;
+      }
     </style>
 
     <title>Dashboard | Expense Tracker</title>
-</head>
+  </head>
 
-<body class="h-screen overflow-hidden">
-
+  <body class="h-screen overflow-hidden">
     <div class="flex flex-col h-screen">
-
-        <!-- Header -->
-    <section>
+      <!-- Header -->
+      <section>
         <div class="flex justify-between mt-3">
-            <a class="" href="./profile.html"
-                class="pl-2 self-center cursor-pointer duration-200 hover:scale-125 active:scale-100"
-                title="Go Back">
-                <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 24 24"
-                    class="stroke-blue-300">
-                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5"
-                    d="M11 6L5 12M5 12L11 18M5 12H19"></path>
-                </svg>
-            </a>
-            <div class="text-center mt-2 flex-1 mr-5">
-                <h1 class="font-bold text-2xl">Set Target Expense</h1>
-            </div>
+          <a
+            class=""
+            href="./profile.html"
+            class="pl-2 self-center cursor-pointer duration-200 hover:scale-125 active:scale-100"
+            title="Go Back"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="50px"
+              height="50px"
+              viewBox="0 0 24 24"
+              class="stroke-blue-300"
+            >
+              <path
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                stroke-width="1.5"
+                d="M11 6L5 12M5 12L11 18M5 12H19"
+              ></path>
+            </svg>
+          </a>
+          <div class="text-center mt-2 flex-1 mr-5">
+            <h1 class="font-bold text-2xl">Set Target Expense</h1>
+          </div>
         </div>
-    </section>
+      </section>
 
-    
-   <!-- Body input -->
-    <section class="flex flex-1 flex-col items-center justify-center">
+      <!-- Body input -->
+      <section class="flex flex-1 flex-col items-center justify-center">
         <p class="mb-4">Allocate your budget for this month</p>
         <form id="expense-form" class="flex flex-col items-center space-y-2">
-                <input id="expense-input" name="amount" placeholder="Rp.0" class="mb-4" type="text">
-                <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none" type="submit">
-                    Submit
-                </button>
-            
+          <input
+            id="expense-input"
+            name="amount"
+            placeholder="Rp.0"
+            class="mb-4"
+            type="text"
+          />
+          <button
+            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none"
+            type="submit"
+          >
+            Submit
+          </button>
         </form>
-    </section>
-
-    
-
- 
-</div>
-<script src="../../../public/js/inputExpense.js"></script>
-</body>
-
+      </section>
+    </div>
+    <script src="../../../public/js/inputExpense.js"></script>
+  </body>
 </html>
