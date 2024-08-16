@@ -20,7 +20,7 @@
     ></script>
 
     <!-- local module -->
-    <script type="module" src="../../public/js/history.js"></script>
+    <script type="module" src="../../../public/js/history.js"></script>
 
     <!-- toastr -->
     <link
@@ -45,10 +45,10 @@
         ></div>
       </div>
     </div>
-    <header class="flex px-4 py-4">
+    <header class="flex px-4 py-4 items-center justify-between relative">
       <a
-        href="../pages/index.html"
-        class="pl-2 self-center cursor-pointer duration-200 hover:scale-125 active:scale-100"
+        href="../index.html"
+        class="pl-2 z-10 text-black cursor-pointer duration-200 hover:scale-125 active:scale-100"
         title="Go Back"
       >
         <svg
@@ -66,7 +66,11 @@
           ></path>
         </svg>
       </a>
-      <h1 class="m-auto pr-5 text-[1.5rem] font-[500]">History</h1>
+      <h1
+        class="absolute left-1/2 transform -translate-x-1/2 justify-self-center text-[1.5rem] font-extrabold"
+      >
+        History
+      </h1>
     </header>
 
     <div class="flex justify-around flex-wrap">
@@ -100,7 +104,7 @@
       </div>
     </div>
 
-    <div class="flex flex-col mt-2 px-4">
+    <div class="flex flex-col mt-2 px-8">
       <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
         <div class="py-2 inline-block min-w-full sm:px-2 lg:px-8">
           <div class="overflow-hidden">
