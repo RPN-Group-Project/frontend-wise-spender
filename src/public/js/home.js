@@ -1,3 +1,8 @@
+import apiService from "./apiService.js";
+import expenseTableBody from "./components/expenseTable.js";
+import getStartAndEndOfWeek from "./utils/getStartAndEndOfWeek.js";
+import groupByDayAndSum from "./utils/groupByDayAndSum.js";
+
 $(document).ready(function () {
   // auto redirect to login if no token detected'
   if (!localStorage.getItem("token")) {
