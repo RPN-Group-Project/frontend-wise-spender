@@ -185,6 +185,37 @@ $(document).ready(function () {
       });
   };
 
+  // History table
+  const fetchHistory = () => {
+    showLoader();
+    // console.log(localStorage.getItem("tokenAuth"));
+    apiService
+      .get("expense/user?take=5")
+      .done((response) => {
+        const { data } = response;
+        let tbody = $("#history-table-body");
+        tbody.empty();
+        hideLoader();
+        data.forEach((item) => {
+          tbody.append(
+            expenseTableBody(
+              item.date,
+              item.Category.name,
+              item.amount,
+              item.description
+            )
+          );
+        });
+      })
+      .fail((jqXHR, textStatus, errorThrown) => {
+        hideLoader();
+        if (jqXHR.status === 401) {
+          location.replace("login.html");
+        }
+      });
+  };
+
   fetchDashboard();
   fetchWeeklyChart();
+  fetchHistory();
 });
