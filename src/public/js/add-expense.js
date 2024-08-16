@@ -57,12 +57,20 @@ $(document).ready(function () {
     const amount = $("#amount").val();
 
     if (category_id === "Select Category") {
-      alert("Please select a category");
+      Swal.fire({
+        title: "Oops!",
+        text: "Please select a category",
+        icon: "warning",
+      });
       return;
     }
 
     if (!amount || !description || !date || !category_id) {
-      alert("Please fill in all required fields.");
+      Swal.fire({
+        title: "Oops!",
+        text: "Please fill in all fields",
+        icon: "warning",
+      });
       return;
     }
     apiService
