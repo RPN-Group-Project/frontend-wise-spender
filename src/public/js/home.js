@@ -12,8 +12,6 @@ const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0)
   .toISOString()
   .split("T")[0];
 
-console.log(startOfMonth, endOfMonth);
-
 $(document).ready(function () {
   // auto redirect to login if no token detected'
   if (!localStorage.getItem("token")) {
@@ -62,10 +60,9 @@ $(document).ready(function () {
         const expenses = data.expenses._sum.amount;
         const limit = data.userExpenseLimit.expense_limit;
         const expensePercentage = (expenses / limit) * 100;
-        console.log(expenses, limit, expensePercentage);
         $("#money-spent").text(numberFormat(expenses));
         $("#limit-expense").text(limit);
-        $("#dashboard-percentage").text(expensePercentage + "%");
+        $("#dashboard-percentage").text(Math.floor(expensePercentage) + "%");
 
         if (expensePercentage >= 100) {
           $("#alert-container").removeClass("hidden");
@@ -94,9 +91,9 @@ $(document).ready(function () {
             {
               label: "My First Dataset",
               data: [expenses, limit],
-              borderColor: "rgba(0, 0, 0, 0)", // Menghapus border
+              borderColor: "#d4d4d8", // Menghapus border
               borderWidth: 0,
-              backgroundColor: ["rgb(255,35,35)", "rgb(255, 199, 0)"],
+              backgroundColor: ["rgb(0, 0 ,0)", "rgb(255, 255, 255)"],
               hoverOffset: 4,
             },
           ],
@@ -166,7 +163,7 @@ $(document).ready(function () {
                   saturday,
                   sunday,
                 ],
-                backgroundColor: "#3572EF",
+                backgroundColor: "#27272a",
               },
             ],
           },
@@ -209,7 +206,6 @@ $(document).ready(function () {
   // History table
   const fetchHistory = () => {
     showLoader();
-    // console.log(localStorage.getItem("tokenAuth"));
     apiService
       .get("expense/user?take=5")
       .done((response) => {

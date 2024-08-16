@@ -37,13 +37,40 @@
 
       body {
         font-family: "Montserrat", sans-serif;
-        background: #ddf5ff;
+        background: #ffffff;
       }
 
       .custom-gradient {
-        background: linear-gradient(180.64deg, #050c9c 27.95%, #3572ef 99.45%);
+        background: linear-gradient(to right, rgb(17, 24, 39), rgb(75, 85, 99));
       }
     </style>
+
+    <!-- Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                black: "#000000",
+                neutral: "#404040",
+                white: "#FFFFFF",
+              },
+              zinc: {
+                100: "#f4f4f5",
+                200: "#e4e4e7",
+                300: "#d4d4d8",
+                500: "#71717a",
+                800: "#27272a",
+              },
+              error: {
+                500: "#ef4444",
+              },
+            },
+          },
+        },
+      };
+    </script>
 
     <title>Dashboard | Expense Tracker</title>
   </head>
@@ -63,7 +90,7 @@
     </div>
     <section
       style="
-        background-image: url('../../public/assets/cool-backgroung.png');
+        background-image: url('../../public/assets/zinc-bg.png');
         background-repeat: no-repeat;
         background-size: 100% 75%;
       "
@@ -73,7 +100,7 @@
         <h2 class="text-[1rem] font-bold">
           Hello, <span id="username" class="text-white"> Spender</span>
         </h2>
-        <nav>
+        <nav class="text-white">
           <a class="inline-block" href="#">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -92,13 +119,14 @@
               />
             </svg>
           </a>
-          <a href="./profile/profile.html" class="text-dark inline-block">
+          <a href="./profile/profile.html" class="inline-block">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="ionicon"
               viewBox="0 0 512 512"
               width="25"
               height="25"
+              fill="#FFFFFF"
             >
               <path
                 d="M258.9 48C141.92 46.42 46.42 141.92 48 258.9c1.56 112.19 92.91 203.54 205.1 205.1 117 1.6 212.48-93.9 210.88-210.88C462.44 140.91 371.09 49.56 258.9 48zm126.42 327.25a4 4 0 01-6.14-.32 124.27 124.27 0 00-32.35-29.59C321.37 329 289.11 320 256 320s-65.37 9-90.83 25.34a124.24 124.24 0 00-32.35 29.58 4 4 0 01-6.14.32A175.32 175.32 0 0180 259c-1.63-97.31 78.22-178.76 175.57-179S432 158.81 432 256a175.32 175.32 0 01-46.68 119.25z"
@@ -129,7 +157,7 @@
         <div class="self-center relative w-32 h-32">
           <canvas class="z-40" id="chartDoughnut"></canvas>
           <div
-            class="w-28 h-28 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600 text-center flex align-center justify-center text-white font-bold"
+            class="w-28 h-28 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-zinc-500 text-center flex align-center justify-center text-white font-bold"
           >
             <span id="dashboard-percentage" class="m-auto">Infinity%</span>
           </div>
@@ -174,7 +202,7 @@
             class="w-[30px] h-[30px] self-center transform transition-transform duration-300 hover:scale-110"
             name="wallet-outline"
           ></ion-icon>
-          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-600">
+          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-800">
             Add Expense
           </p>
         </a>
@@ -186,7 +214,7 @@
             name="folder-outline"
             class="w-[30px] h-[30px] self-center transform transition-transform duration-300 hover:scale-110"
           ></ion-icon>
-          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-600">
+          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-800">
             Add Category
           </p>
         </a>
@@ -198,7 +226,7 @@
             name="clipboard-outline"
             class="w-[30px] h-[30px] self-center transform transition-transform duration-300 hover:scale-110"
           ></ion-icon>
-          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-600">
+          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-800">
             History
           </p>
         </a>
@@ -210,7 +238,7 @@
             name="settings-outline"
             class="w-[30px] h-[30px] self-center transform transition-transform duration-300 hover:scale-110"
           ></ion-icon>
-          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-600">
+          <p class="mt-1 text-[0.75rem] max-[375px]:text-center text-blue-800">
             Limit Expense
           </p>
         </a>
@@ -229,7 +257,7 @@
     <section class="history px-4 mt-4">
       <div class="flex justify-between">
         <h1 class="text-[1rem] font-[500]">History</h1>
-        <a href="./history/history.html" class="text-[0.875rem] text-blue-600"
+        <a href="./history/history.html" class="text-[0.875rem] text-blue-800"
           ><div
             class="group hover:text-sky-600 transition ease-in-out duration-200"
           >
@@ -293,7 +321,7 @@
       class="is-flex is-flex-direction-column"
     >
       <div
-        class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600"
+        class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 border rounded-full bottom-4 left-1/2 bg-zinc-800 border-zinc-500"
       >
         <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
           <a
@@ -325,7 +353,7 @@
             class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
           >
             <ion-icon
-              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-800 dark:group-hover:text-blue-500"
               aria-hidden="true"
               name="apps-outline"
             ></ion-icon>
@@ -379,7 +407,7 @@
             class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
           >
             <ion-icon
-              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-800 dark:group-hover:text-blue-500"
               aria-hidden="true"
               name="clipboard-outline"
             ></ion-icon>
@@ -400,7 +428,7 @@
             class="inline-flex flex-col items-center justify-center px-5 rounded-e-full hover:bg-gray-50 dark:hover:bg-gray-800 group"
           >
             <ion-icon
-              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+              class="w-7 h-7 mb-1 text-gray-400 group-hover:text-blue-800 dark:group-hover:text-blue-500"
               aria-hidden="true"
               name="person-outline"
             ></ion-icon>
