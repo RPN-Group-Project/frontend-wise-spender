@@ -107,46 +107,82 @@ $(document).ready(function () {
       });
   };
 
-  // chart
-  const ctx = $("#myChart");
+  // Weekly Chart
+  const { startOfWeek, endOfWeek } = getStartAndEndOfWeek(new Date());
+  const fetchWeeklyChart = () => {
+    showLoader();
+    apiService
+      .get(
+        `expense/user?take=100&startDate=${startOfWeek}&endDate=${endOfWeek}`
+      )
+      .done((response) => {
+        const { data } = response;
+        const {
+          monday,
+          tuesday,
+          wednesday,
+          thursday,
+          friday,
+          saturday,
+          sunday,
+        } = groupByDayAndSum(data);
+        // chart
+        const ctx = $("#myChart");
 
-  new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-      datasets: [
-        {
-          label: "# of Votes",
-          data: [12, 19, 3, 5, 2, 3, 10],
-          backgroundColor: "#3572EF",
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true,
-          grid: {
-            display: false,
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            datasets: [
+              {
+                label: "Money Spent",
+                data: [
+                  monday,
+                  tuesday,
+                  wednesday,
+                  thursday,
+                  friday,
+                  saturday,
+                  sunday,
+                ],
+                backgroundColor: "#3572EF",
+              },
+            ],
           },
-          ticks: {
-            display: false,
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: true,
+                grid: {
+                  display: false,
+                },
+                ticks: {
+                  display: false,
+                },
+              },
+              x: {
+                grid: {
+                  display: false,
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+            },
           },
-        },
-        x: {
-          grid: {
-            display: false,
-          },
-        },
-      },
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-    },
-  });
+        });
+      })
+      .fail((jqXHR, textStatus, errorThrown) => {
+        hideLoader();
+        if (jqXHR.status === 401) {
+          location.replace("login.html");
+        }
+      });
+  };
 
   fetchDashboard();
+  fetchWeeklyChart();
 });
