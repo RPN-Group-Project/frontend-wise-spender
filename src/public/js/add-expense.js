@@ -72,11 +72,16 @@ $(document).ready(function () {
         category_id,
         amount,
       })
-      .done((response) => {
-        const { data } = response;
-        console.log(data);
+      .done(() => {
         hideLoader();
-        alert("Expense Added Successfully");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title:
+            "Your expense has been added, you will be redirected to dashboard",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         setTimeout(() => {
           window.location.href = "../index.html";
         }, 1500);
@@ -86,6 +91,14 @@ $(document).ready(function () {
         hideLoader();
         if (jqXHR.status === 401) {
           window.location.href = "../auth/login.html";
+        } else if (jqXHR.status !== 401) {
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "We couldn't fetch data. Please try again later",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       });
     hideLoader();
