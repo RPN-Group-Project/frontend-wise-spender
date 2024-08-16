@@ -35,6 +35,12 @@ $(document).ready(function () {
     enableScroll();
   };
 
+  // Alert close button
+  $("#alert-close-button").click(function (e) {
+    e.preventDefault();
+    $("#alert").addClass("hidden");
+  });
+
   const fetchDashboard = () => {
     showLoader();
 
