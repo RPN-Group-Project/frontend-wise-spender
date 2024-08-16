@@ -61,7 +61,7 @@ $(document).ready(function () {
         const limit = data.userExpenseLimit.expense_limit;
         const expensePercentage = (expenses / limit) * 100;
         $("#money-spent").text(numberFormat(expenses));
-        $("#limit-expense").text(limit);
+        $("#limit-expense").text(numberFormat(limit));
         $("#dashboard-percentage").text(Math.floor(expensePercentage) + "%");
 
         if (expensePercentage >= 100) {
