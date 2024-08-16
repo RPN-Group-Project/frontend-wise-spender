@@ -1,63 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Onboarding - Category</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.10/base.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.10/base.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Montserrat:wght@400&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        .font-roboto {
-            font-family: 'Roboto', sans-serif;
-        }
-        .font-montserrat {
-            font-family: 'Montserrat', sans-serif;
-        }
+      .font-roboto {
+        font-family: "Roboto", sans-serif;
+      }
+      .font-montserrat {
+        font-family: "Montserrat", sans-serif;
+      }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body class="bg-gray-100 h-screen flex flex-col">
+  </head>
+  <body class="bg-gray-100 h-screen flex flex-col">
     <!-- Header -->
     <header class="flex px-4 py-4 items-center justify-center">
-        <h1 class="text-center text-[3rem] font-extrabold">Add Category</h1>
+      <h1 class="text-center text-[3rem] font-extrabold">Add Category</h1>
     </header>
 
     <!-- Main Content -->
     <main class="flex-grow flex items-center justify-center p-4">
-        <div class="w-full max-w-md p-6 flex flex-col items-center space-y-6">
-            <div class="text-center">
-                <div id="error-message" class="hidden p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
-                    <span class="font-medium">Error!</span> <span id="error-text"></span>
-                </div>
-                <h1 class="text-2xl font-roboto font-bold mb-2">Target Expense: Rp. <span id="target-expense"></span></h1>
-                <p class="text-lg font-montserrat">Allocate your budget to every category you made</p>
-            </div>
-            <form id="categoryForm" class="w-full flex flex-col space-y-4">
-                <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
-                    <!-- Expense Category Input -->
-                    <div class="flex-1">
-                        <input type="text" id="category" name="category" placeholder="Category" class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                    </div>
-                    <!-- Amount Input -->
-                    <div class="flex-1">
-                        <input type="number" id="monthlyBudget" name="monthlyBudget" placeholder="Monthly Budget" class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                    </div>
-                    <!-- Add Button -->
-                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5">Add</button>
-                </div>
-            </form>
-
-            <!-- Table -->
-            <div id="table-category" class="relative overflow-x-auto w-full">
-              
-            </div>
-            <div class="text-center">
-                <button id="continueButton"  type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5">Continue</button>
-            </div>
+      <div class="w-full max-w-md p-6 flex flex-col items-center space-y-6">
+        <div class="text-center">
+          <div
+            id="error-message"
+            class="hidden p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg"
+            role="alert"
+          >
+            <span class="font-medium">Error!</span>
+            <span id="error-text"></span>
+          </div>
+          <h1 class="text-2xl font-roboto font-bold mb-2">
+            Target Expense: Rp. <span id="target-expense"></span>
+          </h1>
+          <p class="text-lg font-montserrat">
+            Allocate your budget to every category you made
+          </p>
         </div>
+        <form id="categoryForm" class="w-full flex flex-col space-y-4">
+          <div
+            class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0"
+          >
+            <!-- Expense Category Input -->
+            <div class="flex-1">
+              <input
+                type="text"
+                id="category"
+                name="category"
+                placeholder="Category"
+                class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                required
+              />
+            </div>
+            <!-- Amount Input -->
+            <div class="flex-1">
+              <input
+                type="number"
+                id="monthlyBudget"
+                name="monthlyBudget"
+                placeholder="Monthly Budget"
+                class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                required
+              />
+            </div>
+            <!-- Add Button -->
+            <button
+              type="submit"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5"
+            >
+              Add
+            </button>
+          </div>
+        </form>
+
+        <!-- Table -->
+        <div id="table-category" class="relative overflow-x-auto w-full"></div>
+        <div class="text-center">
+          <button
+            id="continueButton"
+            type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5"
+          >
+            Continue
+          </button>
+        </div>
+      </div>
     </main>
-    <script src="../../../public/js/onboard-category.js"></script>
-</body>
+    <script type="module" src="../../../public/js/onboard-category.js"></script>
+  </body>
 </html>
