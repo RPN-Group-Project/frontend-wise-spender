@@ -38,7 +38,6 @@ $(document).ready(function () {
     },
     success: function (response) {
       var category = response.data.category;
-      console.log(category);
       var tableCategory = $("#table-category");
       if (category.length === 0) {
         tableCategory.html(`

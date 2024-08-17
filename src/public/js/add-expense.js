@@ -95,7 +95,6 @@ $(document).ready(function () {
         }, 1500);
       })
       .fail((jqXHR, textStatus, errorThrown) => {
-        console.log(errorThrown);
         hideLoader();
         if (jqXHR.status === 401) {
           window.location.href = "../auth/login.html";

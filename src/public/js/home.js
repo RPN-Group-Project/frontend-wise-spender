@@ -93,7 +93,6 @@ $(document).ready(function () {
           );
           $("#alert-text").text("Looks like you're in half of your limit");
         }
-        console.log(expenses, limit);
         // doughnut chart
         const dataDoughnut = {
           labels: ["Money Expense", "Limit Expense"],
