@@ -1,9 +1,31 @@
 import apiService from "./apiService.js";
 
+const now = new Date();
+const startOfMonth = new Date(
+  now.getFullYear(),
+  now.getMonth(),
+  1
+).toISOString();
+const endOfMonth = new Date(
+  now.getFullYear(),
+  now.getMonth() + 1,
+  0
+).toISOString();
+const filterAndSum = (data) => {
+  const filteredData = data.filter((item) => {
+    return item.date >= startOfMonth && item.date <= endOfMonth;
+  });
+
+  const sum = filteredData
+    .map((item) => item.amount)
+    .reduce((a, b) => a + b, 0);
+  return sum;
+};
+
 $(document).ready(function () {
   // auto redirect to login if no token detected'
-  if (!localStorage.getItem("token")) {
-    window.location.href = "./auth/login.html";
+  if (!localStorage.getItem("token") || !localStorage.getItem("userId")) {
+    window.location.href = "../auth/login.html";
   }
   // get userId
   const userId = localStorage.getItem("userId");
@@ -39,10 +61,10 @@ $(document).ready(function () {
     showLoader();
     apiService.get(`category?userId=${userId}`).done((response) => {
       const { data } = response;
-
       data.forEach((item) => {
+        const currentAmount = filterAndSum(item.expenses);
         $("#category-select").append(
-          `<option value="${item.id}">${item.name}</option>`
+          `<option data-amount="${currentAmount}" data-limit="${item.monthly_budget}" value="${item.id}">${item.name}</option>`
         );
       });
     });
@@ -50,6 +72,7 @@ $(document).ready(function () {
 
   $("#add-expense-form").submit(function (e) {
     e.preventDefault();
+
     showLoader();
     const description = $("#description").val();
     const category_id = $("#category-select").val();
@@ -73,6 +96,28 @@ $(document).ready(function () {
       });
       return;
     }
+
+    const categoryTotalAmount = $("option:selected").data("amount");
+    const categoryLimit = $("option:selected").data("limit");
+
+    if (categoryTotalAmount >= categoryLimit) {
+      Swal.fire({
+        title: "Oops!",
+        text: "You cannot add anymore amount because it reaches the category limit",
+        icon: "warning",
+      });
+      return;
+    }
+
+    if (categoryTotalAmount + amount >= categoryLimit) {
+      Swal.fire({
+        title: "Oops!",
+        text: "You cannot add this amount because it exceeds the category limit",
+        icon: "warning",
+      });
+      return;
+    }
+
     apiService
       .post(`expense`, {
         description,
