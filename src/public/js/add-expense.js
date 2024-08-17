@@ -99,8 +99,7 @@ $(document).ready(function () {
 
     const categoryTotalAmount = $("option:selected").data("amount");
     const categoryLimit = $("option:selected").data("limit");
-    console.log(categoryLimit);
-    console.log(categoryTotalAmount + amount);
+
     if (categoryTotalAmount > categoryLimit) {
       Swal.fire({
         title: "Oops!",
