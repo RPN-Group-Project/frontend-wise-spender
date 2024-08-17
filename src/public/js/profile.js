@@ -28,6 +28,13 @@ $(document).ready(function () {
     enableScroll();
   };
 
+  $("#logout-button").click(function () {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
+    window.location.href = "../auth/login.html";
+  });
+
   // Fetch history
   const fetchUser = () => {
     showLoader();
