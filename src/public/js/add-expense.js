@@ -77,7 +77,7 @@ $(document).ready(function () {
     const description = $("#description").val();
     const category_id = $("#category-select").val();
     const date = $("#date").val();
-    const amount = $("#amount").val();
+    const amount = Number($("#amount").val());
 
     if (category_id === "Select Category") {
       Swal.fire({
@@ -100,7 +100,7 @@ $(document).ready(function () {
     const categoryTotalAmount = $("option:selected").data("amount");
     const categoryLimit = $("option:selected").data("limit");
 
-    if (categoryTotalAmount >= categoryLimit) {
+    if (categoryTotalAmount > categoryLimit) {
       Swal.fire({
         title: "Oops!",
         text: "You cannot add anymore amount because it reaches the category limit",
@@ -109,7 +109,7 @@ $(document).ready(function () {
       return;
     }
 
-    if (categoryTotalAmount + amount >= categoryLimit) {
+    if (categoryTotalAmount + amount > categoryLimit) {
       Swal.fire({
         title: "Oops!",
         text: "You cannot add this amount because it exceeds the category limit",
