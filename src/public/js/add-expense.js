@@ -68,6 +68,7 @@ $(document).ready(function () {
         );
       });
     });
+    hideLoader();
   };
 
   $("#add-expense-form").submit(function (e) {
@@ -153,7 +154,6 @@ $(document).ready(function () {
           });
         }
       });
-    hideLoader();
   });
 
   fetchCategories();

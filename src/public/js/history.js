@@ -33,7 +33,6 @@ $(document).ready(function () {
   //   Put Last Week and Today fo Form Default Value
   const today = new Date();
   const todayString = today.toISOString().split("T")[0];
-
   // Get the date for one week ago
   const lastWeek = new Date();
   lastWeek.setDate(today.getDate() - 7);
