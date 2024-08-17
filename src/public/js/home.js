@@ -93,14 +93,14 @@ $(document).ready(function () {
           );
           $("#alert-text").text("Looks like you're in half of your limit");
         }
-
+        console.log(expenses, limit);
         // doughnut chart
         const dataDoughnut = {
           labels: ["Money Expense", "Limit Expense"],
           datasets: [
             {
               label: "My First Dataset",
-              data: [expenses, limit],
+              data: [expenses, limit - expenses],
               borderColor: "#d4d4d8", // Menghapus border
               borderWidth: 0,
               backgroundColor: ["rgb(0, 0 ,0)", "rgb(255, 255, 255)"],
