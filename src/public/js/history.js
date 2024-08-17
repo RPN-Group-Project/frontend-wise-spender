@@ -64,7 +64,6 @@ $(document).ready(function () {
         let tbody = $("#history-table-body");
         tbody.empty();
         data.forEach((item) => {
-          console.log(item);
           tbody.append(
             expenseTableBody(
               item.date,
@@ -98,7 +97,6 @@ $(document).ready(function () {
     apiService
       .get(`expense/user?take=7&page=${page}`)
       .done((response) => {
-        console.log(response);
         const { data, metadata } = response;
         let tbody = $("#history-table-body");
         tbody.empty();

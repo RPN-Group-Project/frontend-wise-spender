@@ -23,7 +23,6 @@ $(document).ready(function () {
       contentType: "application/json",
       data: JSON.stringify({ email: email, password: password }),
       success: function (response) {
-        console.log(response);
         localStorage.setItem("userName", response.user.name);
         localStorage.setItem("userId", response.user.id);
         localStorage.setItem("token", response.tokens.access.token);

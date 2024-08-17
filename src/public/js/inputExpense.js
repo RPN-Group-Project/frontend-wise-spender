@@ -16,7 +16,6 @@ $(document).ready(function() {
 
         let numericValue = parseInt(inputValue)
     
-        console.log("Submitted Value:", numericValue);
     
     });
 });
