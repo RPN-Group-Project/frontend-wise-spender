@@ -1,8 +1,6 @@
 const pagination = (metadata) => {
-  console.log(metadata);
   const { page, totalPages } = metadata;
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
-  console.log(pages);
   if (totalPages > 1) {
     return `
       <ul  class="flex">
