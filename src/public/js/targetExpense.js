@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://backend-wise-spender.vercel.app";
 const userUrl = `${BASE_URL}/v1/users/`;
 
 document.addEventListener("DOMContentLoaded", function () {

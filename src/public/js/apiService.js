@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:3000/v1";
+const API_BASE_URL = "https://backend-wise-spender.vercel.app/v1";
 const keyToken = "token";
 const storeToken = localStorage.getItem(keyToken);
 

@@ -11,7 +11,6 @@ const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1)
 const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0)
   .toISOString()
   .split("T")[0];
-
 $(document).ready(function () {
   // auto redirect to login if no token detected'
   if (!localStorage.getItem("token")) {
@@ -144,6 +143,7 @@ $(document).ready(function () {
 
   // Weekly Chart
   const { startOfWeek, endOfWeek } = getStartAndEndOfWeek(new Date());
+
   const fetchWeeklyChart = () => {
     showLoader();
     apiService
@@ -167,18 +167,18 @@ $(document).ready(function () {
         new Chart(ctx, {
           type: "bar",
           data: {
-            labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
             datasets: [
               {
                 label: "Money Spent",
                 data: [
+                  sunday,
                   monday,
                   tuesday,
                   wednesday,
                   thursday,
                   friday,
                   saturday,
-                  sunday,
                 ],
                 backgroundColor: "#27272a",
               },
